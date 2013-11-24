@@ -1,0 +1,7 @@
+2013-11-24  Jeremy Bennett <jeremy@jeremybennett.com>
+
+	* boat.scad: Created.
+	* ChangeLog: Created.
+	* .gitignore: Created.
+	* README.md: Created.
+	* speaker-brace.scad: Created.
