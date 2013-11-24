@@ -1,5 +1,10 @@
 2013-11-24  Jeremy Bennett <jeremy@jeremybennett.com>
 
+	* boat.scad: Half hull put into module, with Z-reflection
+	parameter, to give full hull.
+
+2013-11-24  Jeremy Bennett <jeremy@jeremybennett.com>
+
 	* boat.scad: Peter's work in progress.
 
 2013-11-24  Jeremy Bennett <jeremy@jeremybennett.com>
