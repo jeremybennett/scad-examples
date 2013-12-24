@@ -1,3 +1,7 @@
+2013-12-24  Jeremy Bennett <jeremy@jeremybennett.com>
+
+	* speaker-brace.scad: Smaller holes and turned on side.
+
 2013-11-24  Jeremy Bennett <jeremy@jeremybennett.com>
 
 	* boat.scad: Half hull put into module, with Z-reflection
