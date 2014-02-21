@@ -1,28 +1,32 @@
 2014-02-21  Jeremy Bennett  <jeremy@jeremybennett.com>
 
+	* cross.scad: Created.
+
+2014-02-21  Jeremy Bennett  <jeremy@jeremybennett.com>
+
 	* .gitignore: Ignore STL and G-code.
 	* aerofoil.scad: Added.
 	* cube.scad: Added.
 	* speaker-brace.scad: Update.
 
-2013-12-24  Jeremy Bennett <jeremy@jeremybennett.com>
+2013-12-24  Jeremy Bennett  <jeremy@jeremybennett.com>
 
 	* speaker-brace.scad: Smaller holes and turned on side.
 
-2013-11-24  Jeremy Bennett <jeremy@jeremybennett.com>
+2013-11-24  Jeremy Bennett  <jeremy@jeremybennett.com>
 
 	* boat.scad: Half hull put into module, with Z-reflection
 	parameter, to give full hull.
 
-2013-11-24  Jeremy Bennett <jeremy@jeremybennett.com>
+2013-11-24  Jeremy Bennett  <jeremy@jeremybennett.com>
 
 	* boat.scad: Peter's work in progress.
 
-2013-11-24  Jeremy Bennett <jeremy@jeremybennett.com>
+2013-11-24  Jeremy Bennett  <jeremy@jeremybennett.com>
 
 	* speaker-brace.scad: Completed first version.
 
-2013-11-24  Jeremy Bennett <jeremy@jeremybennett.com>
+2013-11-24  Jeremy Bennett  <jeremy@jeremybennett.com>
 
 	* boat.scad: Created.
 	* ChangeLog: Created.
