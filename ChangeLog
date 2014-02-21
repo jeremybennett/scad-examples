@@ -1,3 +1,10 @@
+2014-02-21  Jeremy Bennett  <jeremy@jeremybennett.com>
+
+	* .gitignore: Ignore STL and G-code.
+	* aerofoil.scad: Added.
+	* cube.scad: Added.
+	* speaker-brace.scad: Update.
+
 2013-12-24  Jeremy Bennett <jeremy@jeremybennett.com>
 
 	* speaker-brace.scad: Smaller holes and turned on side.
