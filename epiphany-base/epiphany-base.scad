@@ -52,12 +52,19 @@ module fan_support () {
 	cube (size = [15, 31, 16], enter = false);
 	// Lugs have a 1mm overlap to ensure we get a 2-manifold
 	translate (v = [0, 0, 15]) {
-		lug ();
+		difference () {
+			lug ();
+			lug_hole (4);
+		}
 	}
 	translate (v = [0, 28, 15]) {
-		lug ();
+		difference () {
+			lug ();
+			lug_hole (4);
+		}
 	}
 }
+
 
 // Lug for mounting fan. Extrude and rotate. Make 1mm deeper than expected to
 // ensure we can get a 2-manifold when comined with fan support.
@@ -76,9 +83,23 @@ module lug () {
 	}
 }
 
+
+// Lug holes. These are typically 4mm for common fans. Make them stick out
+// 1mm each end so they cut a full hole.
+module lug_hole (diameter) {
+	translate (v = [7.5 - (diameter / 2), 4, 7.5 - (diameter / 2)]) {
+		rotate (a = 90, v = [1, 0, 0]) {
+			cylinder (h = 5, r = diameter / 2, $fn = 12, center = false);
+		}
+	}
+}
+
+
+// The complete design of a base and four fan supports
 base ();
 // All fan supports overlap by 1mm, to ensure we get a 2-manifold.
 translate (v = [0, 0, 2]) fan_support ();
 translate (v = [105, 0, 2]) fan_support ();
 translate (v = [0, 89, 2]) fan_support ();
 translate (v = [105, 89, 2]) fan_support ();
+
