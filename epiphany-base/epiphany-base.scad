@@ -48,8 +48,8 @@ module base () {
 
 
 // Lug for mounting fan. Extrude and rotate
-module lug () {
-	linear extrude (height = 3, centre = false) {
+//module lug () {
+//	linear extrude (height = 3, centre = false) {
 		
 
 base ();
