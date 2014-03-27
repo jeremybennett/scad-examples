@@ -1,3 +1,11 @@
+2014-03-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* epiphany-base/epiphany-base.scad: Add license terms. Correct
+	hole spacings, thicker lugs, indents for bolt heads, optional
+	dimensions.
+	* epiphany-base/epiphany-base.stl: Regenerated.
+	* epiphany-base/LICENSE: Created.
+
 2014-03-21  Jeremy Bennett  <jeremy@jeremybennett.com>
 
         * epiphany-base/epiphany-base.scad: Fully parameterized, add base
