@@ -1,5 +1,9 @@
 2014-03-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* epiphany-base/epiphany-base.scad: Don't show dimensions by default.
+
+2014-03-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* cross.stl: Generated from SCAD file.
 
 2014-03-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
