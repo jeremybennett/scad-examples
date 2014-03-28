@@ -1,5 +1,21 @@
 2014-03-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* epiphany-base/epiphany-base.scad: Simplified based on including files.
+	* epiphany-base/epiphany-base.stl: Regenerated.
+	* epiphany-base/epiphany-core.scad: Moved the module definitions
+	to this file for inclusions.
+	* epiphany-base/epiphany-dimensions.scad: Moved the dimensioning
+	code to this file.
+	* epiphany-base/epiphany-parameters.scad: Moved the parameters
+	defining the base to this file.
+	* epiphany-base/epiphany-spacer.scad: A separate module for the
+	spacer component.
+	* epiphany-base/epiphany-spacer.stl: Generated from the SCAD file.
+	* libraries/TextGenerator.scad: Created from upstream file.
+	* libraries/dimlines.scad: Likewise.
+
+2014-03-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* epiphany-base/epiphany-base.scad: Add license terms. Correct
 	hole spacings, thicker lugs, indents for bolt heads, optional
 	dimensions.
