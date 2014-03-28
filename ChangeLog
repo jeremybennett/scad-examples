@@ -1,5 +1,9 @@
 2014-03-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* cross.stl: Generated from SCAD file.
+
+2014-03-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* epiphany-base/epiphany-base.scad: Simplified based on including files.
 	* epiphany-base/epiphany-base.stl: Regenerated.
 	* epiphany-base/epiphany-core.scad: Moved the module definitions
