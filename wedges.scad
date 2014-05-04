@@ -72,28 +72,67 @@ module wedge2d (d1, d2, a1, a2) {
 // It is clearer to move the wedge and rotate around the Y axis, than to try to
 // work out the actual rotation vector.
 
-// @param d1  Diameter in the X direction
-// @param d2  Diameter in the Y direction
-// @param a1  Angle from origin of start of wedge
-// @param a2  Angle from origin of end of wedge
-// @param az  Angle up of the wedge
-module wedge3d (d1, d2, a1, a2, az) {
-	difference () {
-		rotate_extrude ($fn = 360)
-			wedge2d (d1, d2, a1, a2);
-		linear_extrude (height = d1 + d2, center = true)
-			square_mask (l = d1 + d2, a1 = 0, a2 = az);
-	}
+// @param d1   Diameter in the X direction
+// @param d2   Diameter in the Y direction
+// @param a1   Angle from origin of start of wedge
+// @param a2   Angle from origin of end of wedge
+// @param az1  Starting angle up of the wedge
+// @param az2  Ending angle up of the wedge
+module wedge3d (d1, d2, a1, a2, az1, az2) {
+	step_len = 3;		// wedge increment in mm
+	step_angle = acos (1 - step_len * step_len  / 2 / d1 / d1);		// Cosine rule
+	// Reduce step angle to ensure wedge increments overlap
+	for (a = [ az1 : step_angle * 0.9 : az2 ])
+		rotate (a = [0, -a, 0])
+			translate (v = [d1 / 2, 0, 0])
+				rotate (a = [0, 0, -(a1 + a2) / 2])
+					linear_extrude (height = step_len, center = false)
+						wedge2d (d1, d2, a1, a2);
+
 }			// wedge3d ()
 
-//		linear_extrude (height = 44.3, center = true)
-//			square_mask (l = 44.3, a1 = 0, a2 = 15);
-//wedge3d (19.3, 25.0, 10, 30, 15);
 
-linear_extrude (height = 10)
-wedge2d (19.3, 25.0, 10, 30);
+// Construct one wedge in its correct location
+
+// wedge3d has translated the wedge to be centered on the X axix and
+// shifted by the x radius. Move it back.
+
+// @param d1   Diameter in the X direction
+// @param d2   Diameter in the Y direction
+// @param a1   Angle from origin of start of wedge
+// @param a2   Angle from origin of end of wedge
+// @param az1  Starting angle up of the wedge
+// @param az2  Ending angle up of the wedge
+module wedge (d1, d2, a1, a2, az1, az2) {
+	rotate (a = [0, 0, (a1 + a2) / 2])
+		translate (v = [-d1 / 2, 0, 0])
+			wedge3d (d1, d2, a1, a2, az1, az2);
+}
 
 
-	
+// Print an actual support wedge
+
+// This knows that the base is an elipse with diameters 19.3cm and 25.0cm
+
+// @param start_angle  The angle at which the wedge starts
+// @param end_angle    The angle at which the wedge starts
+// @param tilt_angle   The angle at which the stand is to be tilted
+module samsung_support (start_angle, end_angle, tilt_angle) {
+	difference () {
+		union () {
+			wedge (189, 246, start_angle, end_angle, 0, tilt_angle);
+			difference () {
+				wedge (199, 256, start_angle, end_angle, 0, tilt_angle);
+				wedge (193, 250, start_angle - 1, end_angle + 1, tilt_angle - 1,
+				       tilt_angle + 1);
+			}
+		}
+		wedge (153, 210, start_angle - 1, end_angle + 1, -1, tilt_angle + 5);
+	}
+}	
 
 
+// Produce a support
+samsung_support (30, 60, 5);
+
+//cube (100);

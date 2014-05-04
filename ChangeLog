@@ -1,5 +1,9 @@
 2014-05-04  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* wedges.scad (wedge, samsung_support): Created.
+
+2014-05-04  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* wedges.scad (triangle, square_mask, wedge2d, wedge3d): Created.
 
 2014-05-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
