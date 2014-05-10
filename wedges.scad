@@ -79,7 +79,7 @@ module wedge2d (d1, d2, a1, a2) {
 // @param az1  Starting angle up of the wedge
 // @param az2  Ending angle up of the wedge
 module wedge3d (d1, d2, a1, a2, az1, az2) {
-	step_len = 3;		// wedge increment in mm
+	step_len = (d1 + d2) / 100;		// wedge increment in mm
 	step_angle = acos (1 - step_len * step_len  / 2 / d1 / d1);		// Cosine rule
 	// Reduce step angle to ensure wedge increments overlap
 	for (a = [ az1 : step_angle * 0.9 : az2 ])
@@ -127,12 +127,31 @@ module samsung_support (start_angle, end_angle, tilt_angle) {
 				       tilt_angle + 1);
 			}
 		}
-		wedge (153, 210, start_angle - 1, end_angle + 1, -1, tilt_angle + 5);
+		wedge (193 * 0.9, 250 * 0.9, start_angle - 2, end_angle + 2, -1,
+		       tilt_angle + 5);
+		// Remove any anoying bit at the center
+		cylinder (h = 199, d = 100, center = true);
 	}
 }	
 
 
-// Produce a support
-samsung_support (30, 60, 5);
+// Produce a pair of supports
 
-//cube (100);
+// For convenience when printing move them closer together.
+
+// @param start_angle  The angle at which the wedge starts
+// @param end_angle    The angle at which the wedge starts
+// @param tilt_angle   The angle at which the stand is to be tilted
+module samsung_support_pair (start_angle, end_angle, tilt_angle) {
+	rotate (a = [0, 0, 5 - start_angle])
+		samsung_support (start_angle, end_angle, tilt_angle);
+
+	// Produce a mirror support
+	mirror (v = [0, 1, 0])
+		rotate (a = [0, 0, 5 - start_angle])
+			samsung_support (start_angle, end_angle, tilt_angle);
+
+}			// samsung_support_pair ()
+
+samsung_support_pair (30, 45, 7);
+//cube (100)

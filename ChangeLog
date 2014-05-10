@@ -1,3 +1,8 @@
+2014-05-10 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* wedges.scad (wedge3d): Better formula for increment.
+	(samsung_support_pair): Created.
+
 2014-05-04  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* wedges.scad (wedge, samsung_support): Created.
