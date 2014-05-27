@@ -1,4 +1,9 @@
-2014-05-36 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2014-05-27 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* tool-holders/try-square.scad (try_square_block): Added sloping
+	support.
+
+2014-05-27 Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* .gitignore: Also ignore STL, PDF and graphics files.
 	* rose.scad (connector, spray_holes, rose): Divide logic into

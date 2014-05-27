@@ -32,19 +32,35 @@ module screwhole_y (bore, length, x_off, z_off) {
 		rotate (a = [-90, 0, 0])
 			screwhole (bore = bore, length = length);
 }
-		
+
+
+// The solid support is a block with a triangular end.
+module try_square_block () {
+	iota = 0.01;
+	l = sqrt (68 * 68 / 2);
+	union () {
+		cube (size = [147.5, 20, 20], center = false);
+		intersection () {
+			rotate (a = [0, -45, 0])
+				translate (v = [l / 2, 10, 0])
+					cube (size = [l, 20, 400], center = true);
+			cube (size = [68, 20, 68 - 7.5], center = false);
+		}
+	}
+}
+
 
 // Supporter for a try-square on a rack
 module try_square () {
 	iota = 0.01;
 	difference () {
-		cube (size = [135, 20, 20], center = false);
+		try_square_block ();
 		translate (v = [7.5, 5.5, -iota])
-			cube (size = [48, 3, 20 + iota * 2], center = false);
+			cube (size = [48, 3, 400], center = false);
 		screwhole_y (bore = 3.5, length = 20, x_off =  65.5, z_off = 10);
-		screwhole_y (bore = 3.5, length = 20, x_off = 125.0, z_off = 10);
+		screwhole_y (bore = 3.5, length = 20, x_off = 137.5, z_off = 10);
 	}
 }
 
-
 try_square ();
+
