@@ -1,5 +1,10 @@
 2014-05-29  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* tool-holders/crimper.scad (crimp_block): Slightly wider
+	(crimp_support): Screw holes slightly further out.
+
+2014-05-29  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* tool-holders/crimper.scad: Created.
 	* tool-holders/try-square.scad: Tidied up commenting.
 	* tool-holders/wire-strippers.scad: Likewise.

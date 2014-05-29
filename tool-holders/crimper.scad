@@ -5,7 +5,7 @@
 // Crimp holder 3D Design is licensed under a Creative Commons
 // Attribution-ShareAlike 3.0 Unported License.
 
-// You should have received a copy of the license along with this work.  If not, 
+// You should have received a copy of the license along with this work.  If not,
 // see <http://creativecommons.org/licenses/by-sa/3.0/>.
 
 // -----------------------------------------------------------------------------
@@ -37,7 +37,7 @@ module screwhole_y (bore, length, x_off, z_off) {
 module crimp_block () {
 	difference () {
 		translate (v = [0, 0, 10])
-			cube (size = [83, 38, 20], center = true);
+			cube (size = [85, 38, 20], center = true);
 		rotate (a = [0, -8, 0])
 			translate (v = [-15.75, 1, 30])
 				cube (size = [31.5, 26, 60], center = true);
@@ -54,8 +54,8 @@ module crimp_block () {
 module crimp_support () {
 	difference () {
 		crimp_block ();
-		screwhole_y (bore = 4, length = 38, x_off = -36.5, z_off = 10);
-		screwhole_y (bore = 4, length = 38, x_off =  36.5, z_off = 10);
+		screwhole_y (bore = 4, length = 38, x_off = -38, z_off = 10);
+		screwhole_y (bore = 4, length = 38, x_off =  38, z_off = 10);
 	}
 }
 
