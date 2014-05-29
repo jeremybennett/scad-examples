@@ -1,8 +1,8 @@
-// Try-square holder 3D Design
+// Crimp holder 3D Design
 
 // Copyright (c) 2014 by Jeremy Bennett <jeremy.bennett@embecosm.com>
 
-// Try-square holder 3D Design is licensed under a Creative Commons
+// Crimp holder 3D Design is licensed under a Creative Commons
 // Attribution-ShareAlike 3.0 Unported License.
 
 // You should have received a copy of the license along with this work.  If not, 
@@ -24,43 +24,40 @@ module screwhole (bore, length) {
 	}
 }
 
-		
+
 // A screw hole for a screw parallel with the Y axis
 module screwhole_y (bore, length, x_off, z_off) {
-	iota = length / 100;
-	translate (v = [x_off, length / 2, z_off])
+	translate (v = [x_off, 0, z_off])
 		rotate (a = [-90, 0, 0])
 			screwhole (bore = bore, length = length);
 }
 
 
-// The solid support is a block with a triangular end.
-module try_square_block () {
-	iota = 0.01;
-	l = sqrt (68 * 68 / 2);
-	union () {
-		cube (size = [147.5, 20, 20], center = false);
-		intersection () {
-			rotate (a = [0, -45, 0])
-				translate (v = [l / 2, 10, 0])
-					cube (size = [l, 20, 400], center = true);
-			cube (size = [68, 20, 68 - 7.5], center = false);
-		}
-	}
-}
-
-
-// Supporter for a try-square on a rack
-module try_square () {
-	iota = 0.01;
+// The main holder block
+module crimp_block () {
 	difference () {
-		try_square_block ();
-		translate (v = [7.5, 5.5, -iota])
-			cube (size = [48, 3, 400], center = false);
-		screwhole_y (bore = 3.5, length = 20, x_off =  65.5, z_off = 10);
-		screwhole_y (bore = 3.5, length = 20, x_off = 137.5, z_off = 10);
+		translate (v = [0, 0, 10])
+			cube (size = [83, 38, 20], center = true);
+		rotate (a = [0, -8, 0])
+			translate (v = [-15.75, 1, 30])
+				cube (size = [31.5, 26, 60], center = true);
+		rotate (a = [0, 8, 0])
+			translate (v = [15.75, 1, 30])
+				cube (size = [31.5, 26, 60], center = true);
+		translate (v = [0, 1, 30])
+			cube (size = [31.5, 26, 60], center = true);
 	}
 }
 
-try_square ();
 
+// Crimp support with screwholes
+module crimp_support () {
+	difference () {
+		crimp_block ();
+		screwhole_y (bore = 4, length = 38, x_off = -36.5, z_off = 10);
+		screwhole_y (bore = 4, length = 38, x_off =  36.5, z_off = 10);
+	}
+}
+
+
+crimp_support ();

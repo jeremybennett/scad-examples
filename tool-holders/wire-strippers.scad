@@ -1,8 +1,8 @@
-// Try-square holder 3D Design
+// Wire stripper holder 3D Design
 
 // Copyright (c) 2014 by Jeremy Bennett <jeremy.bennett@embecosm.com>
 
-// Watering Can Rose 3D Design is licensed under a Creative Commons
+// Wire stripper 3D Design is licensed under a Creative Commons
 // Attribution-ShareAlike 3.0 Unported License.
 
 // You should have received a copy of the license along with this work.  If not, 
