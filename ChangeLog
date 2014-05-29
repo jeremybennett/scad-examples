@@ -1,5 +1,10 @@
 2014-05-29  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* tool-holders/crimper.scad (crimp_block): screw heads on correct
+	side.
+
+2014-05-29  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* tool-holders/crimper.scad (crimp_block): Slightly wider
 	(crimp_support): Screw holes slightly further out.
 

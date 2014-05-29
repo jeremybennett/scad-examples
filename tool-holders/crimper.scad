@@ -39,12 +39,12 @@ module crimp_block () {
 		translate (v = [0, 0, 10])
 			cube (size = [85, 38, 20], center = true);
 		rotate (a = [0, -8, 0])
-			translate (v = [-15.75, 1, 30])
+			translate (v = [-15.75, -1, 30])
 				cube (size = [31.5, 26, 60], center = true);
 		rotate (a = [0, 8, 0])
-			translate (v = [15.75, 1, 30])
+			translate (v = [15.75, -1, 30])
 				cube (size = [31.5, 26, 60], center = true);
-		translate (v = [0, 1, 30])
+		translate (v = [0, -1, 30])
 			cube (size = [31.5, 26, 60], center = true);
 	}
 }
