@@ -1,5 +1,9 @@
 2014-05-30  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* tool-holders/long-nose.scad: Created.
+
+2014-05-30  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* tool-holders/crimper.scad (crimp_block): Parameterize
 	(crimp_support): Add extra cutout.
 
