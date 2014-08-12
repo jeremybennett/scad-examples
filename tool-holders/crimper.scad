@@ -34,28 +34,32 @@ module screwhole_y (bore, length, x_off, z_off) {
 
 
 // The main holder block
-module crimp_block () {
+
+// @param base_len  Length of hole at bottom
+module crimp_block (base_len) {
 	difference () {
 		translate (v = [0, 0, 10])
-			cube (size = [85, 38, 20], center = true);
+			cube (size = [base_len + 26, 38, 20], center = true);
 		rotate (a = [0, -8, 0])
-			translate (v = [-15.75, -1, 30])
-				cube (size = [31.5, 26, 60], center = true);
+			translate (v = [-base_len / 4, -1, 30])
+				cube (size = [base_len / 2, 26, 60], center = true);
 		rotate (a = [0, 8, 0])
-			translate (v = [15.75, -1, 30])
-				cube (size = [31.5, 26, 60], center = true);
+			translate (v = [base_len / 4, -1, 30])
+				cube (size = [base_len / 2, 26, 60], center = true);
 		translate (v = [0, -1, 30])
-			cube (size = [31.5, 26, 60], center = true);
+			cube (size = [base_len / 2, 26, 60], center = true);
 	}
 }
 
 
 // Crimp support with screwholes
 module crimp_support () {
+	base_len = 58;
+	screw_off = base_len / 2 + 7;
 	difference () {
-		crimp_block ();
-		screwhole_y (bore = 4, length = 38, x_off = -38, z_off = 10);
-		screwhole_y (bore = 4, length = 38, x_off =  38, z_off = 10);
+		crimp_block (base_len);
+		screwhole_y (bore = 4, length = 38, x_off = -screw_off, z_off = 10);
+		screwhole_y (bore = 4, length = 38, x_off =  screw_off, z_off = 10);
 	}
 }
 

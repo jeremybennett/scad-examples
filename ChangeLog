@@ -1,3 +1,9 @@
+2014-08-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* cuttlefish-support.scad: Created.
+	* tool-holders/crimper.scad (crimp_block): Parameterize.
+	(crimp_support): Likewise.
+
 2014-05-29  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* tool-holders/crimper.scad (crimp_block): screw heads on correct
