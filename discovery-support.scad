@@ -30,15 +30,17 @@ module discovery_support () {
 		translate (v = [10 / 2, 10 / 2, 13 / 2])
 			cube (size = [10, 10, 13], center = true);
 		// Slot for the board
-		translate (v = [10 / 2 + 7, 10 / 2 + 7, 1.8 / 2 + 9])
+		translate (v = [10 / 2 + 5, 10 / 2 + 5, 1.8 / 2 + 9])
 			cube (size = [10, 10, 1.8], center = true);
 		// Screw hole
-		translate (v = [3.5, 3.5, 13 / 2])
+		translate (v = [3, 3, 13 / 2])
 			cylinder (r = 1.7, h = 13.2, center = true, $fn = 24);
 		// Screw countersink
-		translate (v = [3.5, 3.5, 13.1 - 1.3 / 2])
+		translate (v = [3, 3, 13.1 - 1.3 / 2])
 			cylinder (r1 = 1.7, r2 = 3, h = 1.3, center = true, $fn = 24);
 	}
 }
 
-discovery_support ();
+// Rotate for better printing
+rotate (a = [90, 0, 0])
+	discovery_support ();
