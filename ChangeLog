@@ -1,5 +1,9 @@
 2014-08-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* discovery-support.scad: Created.
+
+2014-08-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* cuttlefish-support.scad (main_block, cuttlefish_support): Reduce
 	hole spacing to 18mm and increase hole diameter to 3.4mm.
 
