@@ -1,8 +1,8 @@
-// Crimp holder 3D Design
+// Long nose plier holder 3D Design
 
 // Copyright (c) 2014 by Jeremy Bennett <jeremy.bennett@embecosm.com>
 
-// Crimp holder 3D Design is licensed under a Creative Commons
+// Long nose plier holder 3D Design is licensed under a Creative Commons
 // Attribution-ShareAlike 3.0 Unported License.
 
 // You should have received a copy of the license along with this work.  If not,
@@ -35,16 +35,17 @@ module screwhole_y (bore, length, x_off, z_off) {
 
 // The main holder block
 
-// @param base_len  Length of the hole at the base
-// @param base_width  Width of the base
-module crimp_block (base_len, base_width) {
+// @param base_len     Length of the hole at the base
+// @param base_width   Width of the base
+// @param slope_angle  How much the sides should slope
+module plier_block (base_len, base_width, slope_angle) {
 	difference () {
 		translate (v = [0, 0, 10])
-			cube (size = [base_len + 26, base_width + 18, 20], center = true);
-		rotate (a = [0, -8, 0])
+			cube (size = [base_len + 26, base_width + 12, 20], center = true);
+		rotate (a = [0, -slope_angle, 0])
 			translate (v = [-base_len / 4, -1, 30])
 				cube (size = [base_len / 2, base_width, 60], center = true);
-		rotate (a = [0, 8, 0])
+		rotate (a = [0,  slope_angle, 0])
 			translate (v = [base_len / 4, -1, 30])
 				cube (size = [base_len / 2, base_width, 60], center = true);
 		translate (v = [0, -1, 29])
@@ -53,20 +54,21 @@ module crimp_block (base_len, base_width) {
 }
 
 
-// Crimp support with screwholes
-module crimp_support () {
-	base_len = 58;
-   base_width = 20;
+// Plier support with screwholes
+module plier_support () {
+	base_len = 20;
+   base_width = 11;
 	screw_off = base_len / 2 + 7;
-	screw_len = base_width + 18;
+	screw_len = base_width + 12;
 	difference () {
-		crimp_block (base_len = base_len, base_width = base_width);
-		screwhole_y (bore = 4, length = 38, x_off = -screw_off, z_off = 10);
-		screwhole_y (bore = 4, length = 38, x_off =  screw_off, z_off = 10);
-		translate (v = [10, -1, 29])
-			cube (size = [30, base_width + 6, 60], center = true);
+		plier_block (base_len = base_len, base_width = base_width,
+		             slope_angle = 0);
+		screwhole_y (bore = 4, length = screw_len, x_off = -screw_off,
+		             z_off = 10);
+		screwhole_y (bore = 4, length = screw_len, x_off =  screw_off,
+		             z_off = 10);
 	}
 }
 
 
-crimp_support ();
+plier_support ();
