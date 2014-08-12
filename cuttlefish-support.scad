@@ -14,10 +14,10 @@
 module main_block () {
 	union () {
  		translate (v = [0, 0, 5])
-			cube (size = [19, 6, 10], center = true);
-		translate (v = [19 / 2, 0, 13 / 2])
+			cube (size = [18, 6, 10], center = true);
+		translate (v = [18 / 2, 0, 13 / 2])
 			cylinder (r = 3, h = 13, center = true, $fn = 24);
- 		translate (v = [-19 / 2, 0, 13 / 2])
+ 		translate (v = [-18 / 2, 0, 13 / 2])
 			cylinder (r = 3, h = 13, center = true, $fn = 24);
 	}
 }
@@ -27,10 +27,10 @@ module main_block () {
 module cuttlefish_support () {
 	difference () {
 		main_block ();
-		translate (v = [19 / 2, 0, 13 / 2])
-			cylinder (r = 1.5, h = 13.5, center = true, $fn = 24);
-		translate (v = [-19 / 2, 0, 13 / 2])
-			cylinder (r = 1.5, h = 13.5, center = true, $fn = 24);
+		translate (v = [18 / 2, 0, 13 / 2])
+			cylinder (r = 1.7, h = 13.5, center = true, $fn = 24);
+		translate (v = [-18 / 2, 0, 13 / 2])
+			cylinder (r = 1.7, h = 13.5, center = true, $fn = 24);
 	}
 }
 

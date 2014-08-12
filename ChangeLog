@@ -1,8 +1,13 @@
 2014-08-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* cuttlefish-support.scad (main_block, cuttlefish_support): Reduce
+	hole spacing to 18mm and increase hole diameter to 3.4mm.
+
+2014-08-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* cuttlefish-support.scad: Created.
 	* tool-holders/crimper.scad (crimp_block): Parameterize.
-	(crimp_support): Likewise.2014-05-30  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+	(crimp_support): Likewise.
 
 2014-05-30  Jeremy Bennett  <jeremy.bennett@embecosm.com
 
