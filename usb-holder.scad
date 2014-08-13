@@ -47,6 +47,7 @@ module usb_holder () {
 	}
 }
 
-usb_holder ();
+rotate (a = [-90, 0, 0])
+   usb_holder ();
 
 
