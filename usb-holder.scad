@@ -20,6 +20,9 @@ module usb_holder () {
 		// Slot for the hub
 		translate (v = [62 / 2 + 9.8, 12 / 2, 19.4 / 2])
 			cube (size = [62, 12.2, 19.6], center = true);
+		// USB lead access
+		translate (v = [40 / 2 + 21, 16 / 2, 15 / 2])
+			cube (size = [40, 16.2, 15.2], center = true);
 		// Screw access
 		translate (v = [5, 8, 10 / 2 + 13.2])
 			cylinder (r = 3.3, h = 10.2, center = true, $fn = 24);
