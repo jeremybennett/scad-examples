@@ -1,5 +1,10 @@
 2014-08-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* discovery-support.scad (discover_support): deeper and wider
+	slot.
+
+2014-08-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* discovery-support.scad: Rotate for better printing.
 	(discover_support): Increase depth of slot.
 

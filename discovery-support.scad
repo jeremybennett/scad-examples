@@ -30,8 +30,8 @@ module discovery_support () {
 		translate (v = [10 / 2, 10 / 2, 13 / 2])
 			cube (size = [10, 10, 13], center = true);
 		// Slot for the board
-		translate (v = [10 / 2 + 5, 10 / 2 + 5, 1.8 / 2 + 9])
-			cube (size = [10, 10, 1.8], center = true);
+		translate (v = [10 / 2 + 4.5, 10 / 2 + 4.5, 2.2 / 2 + 9])
+			cube (size = [10, 10, 2.2], center = true);
 		// Screw hole
 		translate (v = [3, 3, 13 / 2])
 			cylinder (r = 1.7, h = 13.2, center = true, $fn = 24);
