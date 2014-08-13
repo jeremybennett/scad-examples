@@ -1,5 +1,10 @@
 2014-08-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* usb-holder.scad (usb_holder): Increase height, slightly reduce
+	width of cut-out.
+
+2014-08-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* usb-holder.scad: Rotate for better printing.
 
 2014-08-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
