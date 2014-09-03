@@ -1,5 +1,11 @@
 2014-09-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* feeder.scad (module cut_out): Correct sizes and eliminate
+	overhang.
+	(module  base_shape): Likewise.
+
+2014-09-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* feeder.scad (module feeder): move cylinders and cubes by 0.1 to
 	ensure 2-manifold.
 
