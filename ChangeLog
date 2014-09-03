@@ -1,3 +1,8 @@
+2014-09-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* feeder.scad (module feeder): move cylinders and cubes by 0.1 to
+	ensure 2-manifold.
+
 2014-08-31  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* feeder.scad: Rewritten using MCAD library.

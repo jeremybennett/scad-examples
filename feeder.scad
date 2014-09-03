@@ -63,15 +63,15 @@ module  base_shape () {
 module feeder () {
 	difference () {
 		base_shape ();
-		translate (v = [-160, +22.5, -6])
+		translate (v = [-160, +22.6, -6])
 			rotate (a = [0, 90, 0])
 				cylinder (h = 200, r = 4);
-		translate (v = [-160, 18.5, -14])
+		translate (v = [-160, 18.6, -14])
 			cube (size = [200, 9, 8]);
-		translate (v = [-160, -22.5, -6])
+		translate (v = [-160, -22.6, -6])
 			rotate (a = [0, 90, 0])
 				cylinder (h = 200, r = 4);
-		translate (v = [-160, -27.5, -14])
+		translate (v = [-160, -27.6, -14])
 			cube (size = [200, 9, 8]);
 	}
 }
