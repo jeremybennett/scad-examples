@@ -63,6 +63,7 @@ module  base_shape () {
 module feeder () {
 	difference () {
 		base_shape ();
+		// Cutouts for threaded rods
 		translate (v = [-160, +29, -6])
 			rotate (a = [0, 90, 0])
 				cylinder (h = 200, r = 4);
@@ -73,6 +74,15 @@ module feeder () {
 				cylinder (h = 200, r = 4);
 		translate (v = [-160, -34, -14])
 			cube (size = [200, 9, 8]);
+		// Cutouts for cable ties
+		translate (v = [-95, 22.5, 0])
+			cube (size = [3.3, 1.8, 20], center=true);
+		translate (v = [-40, 22.5, 0])
+			cube (size = [3.3, 1.8, 20], center=true);
+		translate (v = [-95, -22.5, 0])
+			cube (size = [3.3, 1.8, 20], center=true);
+		translate (v = [-40, -22.5, 0])
+			cube (size = [3.3, 1.8, 20], center=true);
 	}
 }
 

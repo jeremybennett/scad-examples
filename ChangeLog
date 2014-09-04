@@ -1,3 +1,7 @@
+2014-09-04  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* feeder.scad (module feeder): Add cutouts for cable ties.
+
 2014-09-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* feeder.scad (module cut_out): Correct sizes and eliminate
