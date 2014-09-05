@@ -1,5 +1,11 @@
 2014-09-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* tool-holders/flush-cutter.scad (module screwhole): Fix cylinder
+	args.
+	* tool-holders/long-nose.scad: Rewrite in simpler form.
+
+2014-09-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* tool-holders/wire-strippers-2.scad: Created.
 
 2014-09-04  Jeremy Bennett  <jeremy.bennett@embecosm.com>

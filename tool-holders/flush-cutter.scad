@@ -16,11 +16,11 @@ module screwhole (bore, length) {
 	half_length = length / 2 + iota;
 	full_length = half_length * 2;
 	union () {
-		cylinder (d = bore, h = full_length, center = true, $fn = 24);
+		cylinder (r = bore / 2, h = full_length, center = true, $fn = 24);
 		translate (v = [0, 0, -half_length + bore / 4 + bore / 10])
-			cylinder (d1 = bore * 2, d2 = bore, h = bore / 2, center = true, $fn = 24);
+			cylinder (r1 = bore, r2 = bore / 2, h = bore / 2, center = true, $fn = 24);
 		translate (v = [0, 0, -half_length + bore / 20])
-			cylinder (d = bore * 2, h = bore / 10, center = true, $fn = 24);
+			cylinder (r = bore, h = bore / 10, center = true, $fn = 24);
 	}
 }
 
