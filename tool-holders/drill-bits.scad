@@ -42,7 +42,7 @@ module drill_holes () {
 	offs  = [11, 14, 18, 23, 29, 35, 42, 50, 59, 69, 79, 90, 102];
 	for (i = [0 : 12]) {
 		translate (v = [offs[i], 0, 2.5])
-			cylinder (r = diams[i] / 2, h = 20, $fn = 24, center = false);
+			cylinder (r = diams[i] / 2 + 0.4, h = 20, $fn = 24, center = false);
 	}
 }
 

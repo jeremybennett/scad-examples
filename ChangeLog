@@ -1,5 +1,10 @@
 2014-09-15  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* tool-holders/drill-bits.scad (module drill_holes): Allow some
+	play in the holes.
+
+2014-09-15  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* tool-holders/drill-bits.scad: Created.
 
 2014-09-07  Jeremy Bennett  <jeremy.bennett@embecosm.com>
