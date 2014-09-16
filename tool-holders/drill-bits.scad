@@ -21,10 +21,10 @@ module screwhole (bore, length) {
 	full_length = half_length * 2;
 	union () {
 		cylinder (r = bore / 2, h = full_length, center = true, $fn = 24);
-		translate (v = [0, 0, -half_length + bore / 4 + bore / 10])
+		translate (v = [0, 0, -half_length + bore / 4 + bore / 4])
 			cylinder (r1 = bore, r2 = bore / 2, h = bore / 2, center = true, $fn = 24);
-		translate (v = [0, 0, -half_length + bore / 20])
-			cylinder (r = bore, h = bore / 10, center = true, $fn = 24);
+		translate (v = [0, 0, -half_length + bore / 8])
+			cylinder (r = bore, h = bore / 4, center = true, $fn = 24);
 	}
 }
 
@@ -41,8 +41,8 @@ module drill_holes () {
 	diams = [1.5, 2.0, 2.5, 3.0, 3.2, 3.5, 4.0, 4.5, 4.8, 5.0, 5.5, 6.0, 6.5];
 	offs  = [11, 14, 18, 23, 29, 35, 42, 50, 59, 69, 79, 90, 102];
 	for (i = [0 : 12]) {
-		translate (v = [offs[i], 0, 2.5])
-			cylinder (r = diams[i] / 2 + 0.4, h = 20, $fn = 24, center = false);
+		translate (v = [offs[i], 0, 16 - 2 * diams[i]])
+			cylinder (r = diams[i] / 2 + 0.2, h = 40, $fn = 24, center = false);
 	}
 }
 
@@ -51,8 +51,8 @@ module drill_holes () {
 module drill_block () {
 	width = 115;
 	difference () {
-		translate (v = [width / 2, 5, 7.5])
-			cube (size = [width, 20, 15], center = true);
+		translate (v = [width / 2, 5, 17.5])
+			cube (size = [width, 20, 35], center = true);
 		drill_holes ();
 	}
 }
@@ -63,8 +63,8 @@ module drill_support () {
 	difference () {
 		drill_block ();
 		// screw_holes
-		screwhole_y (bore = 4, length = 22, x_off =   5, y_off = 6, z_off = 7.5);
-		screwhole_y (bore = 4, length = 22, x_off = 110, y_off = 6, z_off = 7.5);
+		screwhole_y (bore = 4, length = 22, x_off =   5, y_off = 6, z_off = 17.5);
+		screwhole_y (bore = 4, length = 22, x_off = 110, y_off = 6, z_off = 17.5);
 	}
 }
 
