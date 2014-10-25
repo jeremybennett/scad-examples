@@ -18,7 +18,7 @@ use <MCAD/regular_shapes.scad>
 module drill_hole (x, y, bore) {
 	depth = 36;
 	translate (v = [x, y, depth / 2 + 5])
-		cylinder (r = bore / 2 + 0.2, h = depth, $fn = 24, center = true);
+		cylinder (r = bore / 2 + 0.5, h = depth, $fn = 24, center = true);
 }
 
 
@@ -26,8 +26,8 @@ module drill_holes () {
 	// 4mm bit
 	drill_hole (x = 15, y = 30, bore = 3.2);
 	// 5mm bits
-	drill_hole (x = 25, y = 25, bore = 4.4);
-	drill_hole (x = 25, y = 35, bore = 3.8);
+	drill_hole (x = 25, y = 25, bore = 3.8);
+	drill_hole (x = 25, y = 35, bore = 4.4);
 	// 6mm bits
 	drill_hole (x = 36, y = 25, bore = 4.7);
 	drill_hole (x = 36, y = 35, bore = 4.7);

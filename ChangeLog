@@ -1,5 +1,9 @@
 2014-10-25  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* tool-holders/masonry-bits.scad (module drill_holes): Bigger holes.
+
+2014-10-25  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* tool-holders/masonry-bits.scad: Created.
 
 2014-09-16  Jeremy Bennett  <jeremy.bennett@embecosm.com>
