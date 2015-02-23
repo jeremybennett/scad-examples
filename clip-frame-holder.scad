@@ -55,18 +55,18 @@ module base_holder () {
          // The base cube
          translate (v = [-base_w / 2, 0, 0])
             cube (size = [base_w, base_d, base_h], center = false);
-         // Ledge
-         translate (v = [-ledge_w / 2, -ledge_d, 0])
-            cube (size = [ledge_w, ledge_d, ledge_h], center = false);
+         // Ledge allow to extend below, to allow for tilt
+         translate (v = [-ledge_w / 2, -ledge_d, -ledge_h])
+            cube (size = [ledge_w, ledge_d, ledge_h * 2], center = false);
       }
 
       // Groove in the ledge
       translate (v = [-groove_w / 2, -groove_d, ledge_h - groove_h])
          cube (size = [groove_w, groove_d, groove_h], center = false);
 
-      // Slot for clip
-      translate (v = [-CLIP_W / 2, -base_d + CLIP_D, 0])
-         cube (size = [CLIP_W, base_d, CLIP_H], center = false);
+      // Slot for clip. Also extends below to allow for tilt
+      translate (v = [-CLIP_W / 2, -base_d + CLIP_D, -ledge_h])
+         cube (size = [CLIP_W, base_d, CLIP_H + ledge_h], center = false);
    }
 }
 
@@ -93,12 +93,39 @@ module back_slice () {
 }
 
 
+// A triangular prism for slicing out of the middle
+module triangular_prism () {
+   prism_w = base_w * 2;
+   prism_h = base_h / 2;
+   prism_d = base_w / 2;
+   sliced_height = prism_h * 0.8;
+
+   difference () {
+      rotate (a = [-TILT, 0, 0])
+         translate (v = [-prism_w / 2, 0, 0])
+            cube (size = [prism_w, prism_d, prism_h], center = false);
+
+      // Subtract cube for the base
+      translate (v = [-base_w, 0, -base_h])
+         cube (size = [base_w * 2, base_d * 2, base_h], center = false);
+
+      // Subtract cube for the back
+      translate (v = [0, prism_d, 0])
+         back_slice ();
+
+      // Cube to slice off to top
+      translate (v = [-prism_w / 2, 0, sliced_height])
+         cube (size = [prism_w, prism_d, prism_h], center = false);
+   }
+}
+
+
 // The full holder
 
 // The base is tipped back, then triangles are cut away.  And have a flat top,
 // because printing a point is a bad idea.
 
-// To save weight, we take a cylinder out of the middle
+// To save weight, we take a triangular prism out of the centre.
 
 module holder () {
    sliced_height = base_h * 0.8;
@@ -108,8 +135,8 @@ module holder () {
          base_holder ();
 
       // Cube to slice the base. Ensure wide enough
-      translate (v = [-base_w, 0, -base_h])
-         cube (size = [base_w * 2, base_d * 2, base_h], center = false);
+      translate (v = [-base_w, -base_d * 2, -base_h])
+         cube (size = [base_w * 2, base_d * 4, base_h], center = false);
 
       // Cubes to slice off the sides
       translate (v = [base_w / 2, 0, 0])
@@ -125,12 +152,9 @@ module holder () {
       translate (v = [-base_w / 2, 0, sliced_height])
          cube (size = [base_w, base_d, base_h], center = false);
 
-      // Cylinder to save weight
-      translate (v = [0, base_d / 2.3, base_h / 4])
-         rotate (a = [36, 0, 0])
-            rotate (a = [0, 90, 0])
-               cylinder (r = base_d / 4, h = base_w * 2, center = true,
-                         $fn = 12);
+      // Triangular prism to save weight
+      translate (v = [0, base_d / 4.5, base_h / 6])
+         triangular_prism ();
    }
 }
 

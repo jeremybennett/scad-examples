@@ -1,5 +1,12 @@
 2015-02-23  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* clip-frame-holder.scad (base_holder): Extend ledge below
+	to allow for tilt.
+	(triangular_prism): Created.
+	(holder): Subtract triangular prsim rather than cylinder.
+
+2015-02-23  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* clip-frame-holder.scad (holder): Add cutout hole and slice off
 	top.
 
