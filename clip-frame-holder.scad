@@ -65,8 +65,8 @@ module base_holder () {
          cube (size = [groove_w, groove_d, groove_h], center = false);
 
       // Slot for clip. Also extends below to allow for tilt
-      translate (v = [-CLIP_W / 2, -base_d + CLIP_D, -ledge_h])
-         cube (size = [CLIP_W, base_d, CLIP_H + ledge_h], center = false);
+      translate (v = [-CLIP_W / 2, -base_d + CLIP_D, groove_h])
+         cube (size = [CLIP_W, base_d, CLIP_H], center = false);
    }
 }
 
@@ -127,7 +127,7 @@ module triangular_prism () {
 
 // To save weight, we take a triangular prism out of the centre.
 
-module holder () {
+module full_holder () {
    sliced_height = base_h * 0.8;
 
    difference () {
@@ -155,6 +155,19 @@ module holder () {
       // Triangular prism to save weight
       translate (v = [0, base_d / 4.5, base_h / 6])
          triangular_prism ();
+   }
+}
+
+
+// Finally we add some curves to the corners
+module holder () {
+   o = base_w / 2;
+   a = (base_d) / 2;
+   cyl_rad = sqrt (o * o + a * a) - clear_d;
+   intersection () {
+      full_holder ();
+      translate (v = [0, base_d / 2 - clear_d, 0])
+         cylinder (r = cyl_rad, h = base_h);
    }
 }
 

@@ -1,5 +1,12 @@
 2015-02-23  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* clip-frame-holder.scad (base_holder): Clip cutout
+	excludes groove.
+	(full_holder): Renamed from holder
+	(holder): Created to add curves at edges
+
+2015-02-23  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* clip-frame-holder.scad (base_holder): Extend ledge below
 	to allow for tilt.
 	(triangular_prism): Created.
