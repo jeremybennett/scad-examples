@@ -1,5 +1,10 @@
 2015-02-23  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* clip-frame-holder.scad (holder): Add cutout hole and slice off
+	top.
+
+2015-02-23  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* clip-frame-holder.scad: Created.
 
 2014-12-06  Peter Bennett  <peter@jeremybennett.com>

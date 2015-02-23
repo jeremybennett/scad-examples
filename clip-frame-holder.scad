@@ -22,7 +22,7 @@ WIDTH  = 210.0;                         // Frame width
 HEIGHT = 297.0;                         // Frame depth
 DEPTH  =   3.5;                         // Frame thickness
 
-TILT = 5;                               // How much to tilt back
+TILT = 10;                              // How much to tilt back
 
 CLIP_W = 15;                            // Clip width
 CLIP_H = 40;                            // Clip height
@@ -95,8 +95,14 @@ module back_slice () {
 
 // The full holder
 
-// The base is tipped back, then triangles are cut away.
+// The base is tipped back, then triangles are cut away.  And have a flat top,
+// because printing a point is a bad idea.
+
+// To save weight, we take a cylinder out of the middle
+
 module holder () {
+   sliced_height = base_h * 0.8;
+
    difference () {
       rotate (a = [-TILT, 0, 0])
          base_holder ();
@@ -114,6 +120,17 @@ module holder () {
       // Cube to slice off the back
       translate (v = [0, base_d, 0])
          back_slice ();
+
+      // Cube to slice off to top
+      translate (v = [-base_w / 2, 0, sliced_height])
+         cube (size = [base_w, base_d, base_h], center = false);
+
+      // Cylinder to save weight
+      translate (v = [0, base_d / 2.3, base_h / 4])
+         rotate (a = [36, 0, 0])
+            rotate (a = [0, 90, 0])
+               cylinder (r = base_d / 4, h = base_w * 2, center = true,
+                         $fn = 12);
    }
 }
 
