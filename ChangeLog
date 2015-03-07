@@ -1,5 +1,11 @@
 2015-02-23  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* cheerson-cx10/cheerson-cx10-millenium-falcon.dxf: Created.
+	* cheerson-cx10/cheerson-cx10-millenium-falcon.scad: Created.
+	* cheerson-cx10/cheerson-cx10-millenium-falcon.svg: Created.
+
+2015-02-23  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* clip-frame-holder.scad (base_holder): Clip cutout
 	excludes groove.
 	(full_holder): Renamed from holder
