@@ -1,5 +1,9 @@
 2015-03-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* crazyflie/motor-mount.scad: Tune parameters
+
+2015-03-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* crazyflie/motor-mount.scad: Created.
 
 2015-03-07  Jeremy Bennett  <jeremy.bennett@embecosm.com>

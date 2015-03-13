@@ -34,7 +34,7 @@ LEG_OUT_T = 0.5;
 
 ARM_WALL_H = 3.3;
 ARM_WALL_W = 21.3;
-ARM_WALL_T = 0.8;
+ARM_WALL_T = 0.5;
 
 ARM_BASE_XOFF = 1.0;
 ARM_BASE_W    = 4.2;
@@ -46,18 +46,18 @@ ARM_BASE3_L   = 2.8;
 
 HOOK_XOFF1   =  3.8;
 HOOK_XOFF2   = 10.0;
-HOOK_ZOFF    =  2.0;
+HOOK_ZOFF    =  2.2;
 HOOK_BASE_W  =  2.0;
 HOOK_BASE_T  =  0.8;
 HOOK_SIDE1_W =  3.0;
 HOOK_SIDE1_H =  3.3;
-HOOK_SIDE1_T =  0.8;
+HOOK_SIDE1_T =  0.6;
 HOOK_SIDE2_W =  2.0;
 HOOK_SIDE2_H =  3.0;
-HOOK_SIDE2_T =  0.8;
+HOOK_SIDE2_T =  0.6;
 HOOK_SIDE2_A = 25.0;
 HOOK_TOP_W   =  0.8;
-HOOK_TOP_H   =  1.5;
+HOOK_TOP_H   =  ARM_BASE_W / 2 - ARM_WALL_T;
 HOOK_TOP_T   =  0.6;
 
 // The motor cylinder
