@@ -1,3 +1,7 @@
+2015-03-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* blind-holder.scad: Created.
+
 2015-03-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* crazyflie/motor-mount.scad: Tune parameters
