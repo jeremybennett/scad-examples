@@ -1,5 +1,11 @@
 2015-03-28  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* cross.scad: renamed as pectoral-cross.scad
+	* pectoral-cross.scad:  Curved corners for easier printing using a
+	Minkowski hull.
+
+2015-03-28  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* crazyflie/motor-mount-2.scad: Created.
 
 2015-03-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
