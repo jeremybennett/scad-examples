@@ -21,11 +21,16 @@
 // Tiny amount to ensure overlap for simple manifolds
 EPS = 0.001;
 
-// Wall thickness throughout
-T = 0.8;
+// Vertical wall thickness throughout. Best if a multiple of the layer
+// thickness (so needs slic3r coordination).
+TV = 0.9;
+
+// Horizontal wall thickness throughout. Best if a multiple of the head
+// diameter.
+TH = 0.8;
 
 // Constants defining the components
-MOTOR_CYL_D    = 7.2;           // Motor is 6.9, this allows for "bleed"
+MOTOR_CYL_D    = 7.4;           // Motor is 6.9, this allows for "bleed"
 MOTOR_CYL_R    = MOTOR_CYL_D / 2;
 MOTOR_CYL_H    = 9.1;           // Real cylinder extends 0.8 below
 MOTOR_SLOT_W   = 1.4;
@@ -35,9 +40,9 @@ LEG_H = 16.2;                   // Real leg extends 0.8 below
 LEG_W =  3.5;
 
 // PCB dimensions
-ARM_W =  3.3;                   // PCB is actually 3.0
-ARM_T =  1.7;                   // PCB is actually 1.4
-ARM_L = 21.0;
+ARM_W =  3.2;                   // PCB is actually 3.0
+ARM_T =  2.1;                   // PCB is actually 1.4
+ARM_L = 20.0;
 BAR_W = ARM_L / 12;
 
 // Hook
@@ -51,14 +56,14 @@ module motor_cyl () {
       union () {
          // The main cylinder
          difference () {
-            cylinder (r = MOTOR_CYL_R + T, h = MOTOR_CYL_H, center = false);
-            cylinder (r = MOTOR_CYL_R,     h = MOTOR_CYL_H, center = false);
+            cylinder (r = MOTOR_CYL_R + TH, h = MOTOR_CYL_H, center = false);
+            cylinder (r = MOTOR_CYL_R,      h = MOTOR_CYL_H, center = false);
          }
-         // The ridge 1 wall thickness and 1 wall thickness up from the bottom
-         translate (v = [0, 0, MOTOR_CYL_H - T * 2])
+         // The ridge 1/2 wall thickness and 1 wall thickness up from the bottom
+         translate (v = [0, 0, MOTOR_CYL_H - TV * 2])
             difference () {
-               cylinder (r = MOTOR_CYL_R + EPS, h = R,  center = false);
-               cylinder (r = MOTOR_CYL_R - T,   h = R , center = false);
+               cylinder (r = MOTOR_CYL_R + EPS,    h = TV,  center = false);
+               cylinder (r = MOTOR_CYL_R - TH / 2, h = TV , center = false);
             }
       }
       // Slot
@@ -75,10 +80,10 @@ module motor_cyl () {
 // @param  a    Angle to rotate around Z axis
 
 module legs (off, a) {
-   leg_t = (LEG_IN_T + LEG_OUT_T) / 2;
+   $fn = 24;
    rotate (a = [0, 0, a])
-      translate (v = [off, - T / 2, 0])
-         cube (size = [LEG_W, T, LEG_H], center = false);
+      translate (v = [off + LEG_W / 2,, 0])
+	 cylinder (r = LEG_W / 2, h = LEG_H, center = false);
 }
 
 
@@ -87,26 +92,23 @@ module legs (off, a) {
 // @param  xoff  Offset in X direction
 
 module arm (xoff) {
-   translate (v = [xoff, -ARM_W / 2 - T, 0]) {
+   translate (v = [xoff, -ARM_W / 2 - TH, 0]) {
       // Main bar
       difference () {
-         cube (size = [ARM_L, ARM_W + T * 2, ARM_T + T], center = false);
+         cube (size = [ARM_L, ARM_W + TH * 2, ARM_T + TV], center = false);
          // Hollow for PCB
-         translate (v = [0, T, T])
+         translate (v = [0, TH, TV])
             cube (size = [ARM_L, ARM_W, ARM_T], center = false);
-         // 4 Cutouts in base for flexibility
-         translate (v = [0, T, 0])
-            cube (size = [BAR_W, ARM_W, T], center = false);
-         translate (v = [BAR_W * 3, T, 0])
-            cube (size = [BAR_W * 2, ARM_W, T], center = false);
-         translate (v = [BAR_W * 7, T, 0])
-            cube (size = [BAR_W * 2, ARM_W, T], center = false);
-         translate (v = [BAR_W * 11, T, 0])
-            cube (size = [BAR_W, ARM_W, T], center = false);
+         // Original has 4 Cutouts in base for flexibility. We just provide
+         // the one at each end.
+         translate (v = [0, TH, 0])
+            cube (size = [BAR_W, ARM_W, TV + EPS], center = false);
+         translate (v = [BAR_W * 10, TH, 0])
+            cube (size = [BAR_W * 2 + EPS, ARM_W, TV + EPS], center = false);
       }
       // endstop is BAR_W in from the end
-      translate (v = [BAR_W, T, 0])
-         cube (size = [T, ARM_W, ARM_T], center = false);
+      translate (v = [BAR_W, TH, 0])
+         cube (size = [TH, ARM_W, ARM_T], center = false);
    }
 }
 
@@ -119,20 +121,20 @@ module arm (xoff) {
 // @param[in] ang   Angle to rotate the top slot
 
 module wire_hook (xoff, ang) {
-   translate (v = [xoff, 0, ARM_T + T])
+   translate (v = [xoff, 0, ARM_T + TV])
       difference () {
          // Basic hollow cube
-         translate (v = [0, -ARM_W / 2 - T, 0])
-            cube (size = [BAR_W, ARM_W + T * 2, HOOK_H], center = false);
-         translate (v = [0, -ARM_W / 2, T])
-            cube (size = [BAR_W, ARM_W, HOOK_H - T -T], center = false);
+         translate (v = [0, -ARM_W / 2 - TH, 0])
+            cube (size = [BAR_W, ARM_W + TH * 2, HOOK_H], center = false);
+         translate (v = [0, -ARM_W / 2, TV])
+            cube (size = [BAR_W, ARM_W, HOOK_H - TV * 2], center = false);
          // Slot at bottom
-         translate (v = [0, -ARM_W / 2 + T, 0])
-            cube (size = [BAR_W, ARM_W - T * 2, T], center = false);
+         translate (v = [0, -ARM_W / 2 + TH, 0])
+            cube (size = [BAR_W, ARM_W - TH * 2, TV], center = false);
          // Slot at top for wire
          rotate (a = [0, 0, ang])
-            translate (v = [-BAR_W, -T / 2, HOOK_H - T])
-               cube (size = [BAR_W * 3, T, T], center = false);
+            translate (v = [-BAR_W, -TH / 2, HOOK_H - TV])
+               cube (size = [BAR_W * 3, TH, TV], center = false);
       }
 }
 
@@ -140,9 +142,9 @@ module wire_hook (xoff, ang) {
 // Stick everything together.
 module motor_mount () {
    motor_cyl ();
-   // Legs are half in to the cylinder wall
-   legs (MOTOR_CYL_R + T / 2, 135.0);
-   legs (MOTOR_CYL_R + T / 2, 225.0);
+   // Legs are embedded in the cylinder wall
+   legs (MOTOR_CYL_R, 135.0);
+   legs (MOTOR_CYL_R, 225.0);
    // This ensures arm intersects with cylinder
    arm (MOTOR_CYL_R);
    wire_hook (xoff = MOTOR_CYL_R + BAR_W * 3.5, ang =  15);
