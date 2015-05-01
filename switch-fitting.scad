@@ -23,16 +23,11 @@ module top_plate () {
       intersection () {
          scale (v = [2.2, 1.2, 1])
             cylinder (r = 5, h = 100, center = false, $fn = 48);
-         scale (v = [2, 1, 1])
-            sphere (r = 25, center = true, $fn = 96);
+         cube (size = [50, 50, 50], center = true);
       }
-      scale (v = [2, 1, 1])
-         sphere (r = 24, center = true, $fn = 96);
-      scale (v = [2, 1, 1])
-      translate (v = [0, 0, 24.65])
-         cylinder (r = 5, h = 100, center = false, $fn = 48, center = false);
-      translate (v = [-6.7, 0, 25])
-         cube (size = [0.6, 2.2, 2], center = true);
+      cube (size = [50, 50, 48], center = true);
+      translate (v = [-6.5, 0, 24.5])
+         cube (size = [1, 2.2, 2], center = true);
    }
 }
 
@@ -43,11 +38,10 @@ module bottom_plate () {
       intersection () {
          scale (v = [2, 1, 1])
             cylinder (r = 5, h = 1000, center = false, $fn = 48);
-         scale (v = [2, 1, 1])
-            sphere (r = 24, center = true, $fn = 96);
+         cube (size = [50, 50, 48], center = true);
       }
-      scale (v = [4, 2, 2])
-         cube (size = [22, 22, 22], center = true);
+      scale (v = [2, 1, 1])
+         cube (size = [44, 44, 44], center = true);
    }
 }
 
@@ -69,15 +63,16 @@ module base_plate () {
 
 // Hole for the socket
 module bracket () {
-   translate (v = [0, 0, -22]) {
-      difference () {
-         union () {
-            top_plate ();
-            bottom_plate ();
+   rotate (a = [0, 180, 0])
+      translate (v = [0, 0, -22]) {
+         difference () {
+            union () {
+               top_plate ();
+               bottom_plate ();
+            }
+            cylinder (r = 3.2, h = 1000, center = false, $fn = 48);
          }
-         cylinder (r = 3.2, h = 1000, center = false, $fn = 48);
       }
-   }
 }
 
 
