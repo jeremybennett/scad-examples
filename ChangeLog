@@ -1,3 +1,9 @@
+2015-05-01  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* switch-fitting.scad: Modify dimensions after first fitting.
+	(top_plate): Make flat on top.
+	(base_plate): Created.
+
 2015-04-30  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* switch-fitting.scad: Created.

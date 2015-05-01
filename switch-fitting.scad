@@ -12,6 +12,7 @@
 
 // Tiny amount to ensure overlap for simple manifolds
 EPS = 0.001;
+//BASE_PLATE = true;
 
 
 // Top plate
@@ -19,12 +20,15 @@ module top_plate () {
    difference () {
       intersection () {
          scale (v = [2.2, 1.2, 1])
-            cylinder (r = 5, h = 1000, center = false, $fn = 12);
+            cylinder (r = 5, h = 100, center = false, $fn = 48);
          scale (v = [2, 1, 1])
-            sphere (r = 50, center = true, $fn = 96);
+            sphere (r = 25, center = true, $fn = 96);
       }
       scale (v = [2, 1, 1])
-         sphere (r = 49, center = true, $fn = 96);
+         sphere (r = 24, center = true, $fn = 96);
+      scale (v = [2, 1, 1])
+      translate (v = [0, 0, 24.65])
+         cylinder (r = 5, h = 100, center = false, $fn = 48, center = false);
    }
 }
 
@@ -34,26 +38,47 @@ module bottom_plate () {
    difference () {
       intersection () {
          scale (v = [2, 1, 1])
-            cylinder (r = 5, h = 1000, center = false, $fn = 12);
+            cylinder (r = 5, h = 1000, center = false, $fn = 48);
          scale (v = [2, 1, 1])
-            sphere (r = 49, center = true, $fn = 96);
+            sphere (r = 24, center = true, $fn = 96);
       }
       scale (v = [4, 2, 2])
-         cube (size = [47, 47, 47], center =true);
+         cube (size = [22, 22, 22], center = true);
+   }
+}
+
+// Base plate
+module base_plate () {
+   difference () {
+      scale (v = [2.2, 1.2, 1])
+         cylinder (r = 5, h = 100, center = false, $fn = 48);
+      translate (v = [0, 0, 51])
+         cube (size = [100, 100, 100], center = true);
+      cylinder (r = 3.2, h = 1000, center = true, $fn = 48);
+      translate (v = [0, 5.5, 0])
+         cube (size = [2, 2, 10], center = true);
+      translate (v = [0, -5.5, 0])
+         cube (size = [2, 2, 10], center = true);
    }
 }
 
 
 // Hole for the socket
 module bracket () {
-   difference () {
-      union () {
-         top_plate ();
-         bottom_plate ();
+   translate (v = [0, 0, -22]) {
+      difference () {
+         union () {
+            top_plate ();
+            bottom_plate ();
+         }
+         cylinder (r = 3.2, h = 1000, center = false, $fn = 48);
       }
-      cylinder (r = 3, h = 1000, center = false, $fn = 12);
    }
 }
 
-bracket ();
 
+if (BASE_PLATE) {
+   base_plate ();
+} else {
+   bracket ();
+}
