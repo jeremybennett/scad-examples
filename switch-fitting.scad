@@ -12,7 +12,9 @@
 
 // Tiny amount to ensure overlap for simple manifolds
 EPS = 0.001;
-//BASE_PLATE = true;
+
+// Define BASE_PLATE = true on the command line to print the base plate
+// instead.
 
 
 // Top plate
@@ -29,6 +31,8 @@ module top_plate () {
       scale (v = [2, 1, 1])
       translate (v = [0, 0, 24.65])
          cylinder (r = 5, h = 100, center = false, $fn = 48, center = false);
+      translate (v = [-6.7, 0, 25])
+         cube (size = [0.6, 2.2, 2], center = true);
    }
 }
 
