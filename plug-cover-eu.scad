@@ -20,13 +20,13 @@ EPS = 0.001;
 // Hull inside main cover
 module sub_cover () {
     hull () {
-	translate (v = [0, 0, 24 - 37.5 / 2])
+	translate (v = [0, 0, 25 - 37.2 / 2])
             intersection () {
-		sphere (r = 37.5 / 2 - 2, $fn = 180);
+		sphere (r = 37.2 / 2 - 2, $fn = 180);
 		translate (v = [0, 0, 25])
 	            cube (size = [50, 50, 50], center = true);
 	    }
-	cylinder (r = 37.5 / 2 - 2, h = EPS, center = false, $fn = 180);
+	cylinder (r = 37.2 / 2 - 2, h = EPS, center = false, $fn = 180);
     }
 }
 
@@ -34,28 +34,28 @@ module sub_cover () {
 // The main cover
 module cover () {
     hull () {
-	translate (v = [0, 0, 24 - 37.5 / 2])
+	translate (v = [0, 0, 25 - 37.2 / 2])
             intersection () {
-		sphere (r = 37.5 / 2, $fn = 180);
+		sphere (r = 37.2 / 2, $fn = 180);
 		translate (v = [0, 0, 25])
 	            cube (size = [50, 50, 50], center = true);
 	    }
-	cylinder (r = 37.5 / 2, h = EPS, center = false, $fn = 180);
+	cylinder (r = 37.2 / 2, h = EPS, center = false, $fn = 180);
     }
 }
 
 
 // A single pin - allow 0.4mm space each side for easy sliding in.
 module pin () {
-    cylinder (r = 3.7 / 2 + 0.4, h = 20 + 0.4, center = false, $fn = 36);
+    cylinder (r = 3.9 / 2 + 0.4, h = 20 + 0.4, center = false, $fn = 36);
 }
 
 
 // Both pins
 module pins () {
-    translate (v = [-7.5, 0, 0 - EPS])
+    translate (v = [-7.5 - 3.9 / 2 - 0.4, 0, 0 - EPS])
         pin ();
-    translate (v = [ 7.5, 0, 0 - EPS])
+    translate (v = [ 7.5 + 3.9 / 2 + 0.4, 0, 0 - EPS])
         pin ();
 }
 
