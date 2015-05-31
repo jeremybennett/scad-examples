@@ -1,3 +1,7 @@
+2015-05-31  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* plug-cover-eu.scad: Created.
+
 2015-05-01  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* switch-fitting.scad (top_plate, bottom_plate): Flat on both
