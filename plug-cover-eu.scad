@@ -20,7 +20,7 @@ EPS = 0.001;
 // Hull inside main cover
 module sub_cover () {
     hull () {
-	translate (v = [0, 0, 25 - 37.2 / 2])
+	translate (v = [0, 0, 27 - 37.2 / 2])
             intersection () {
 		sphere (r = 37.2 / 2 - 2, $fn = 180);
 		translate (v = [0, 0, 25])
@@ -34,7 +34,7 @@ module sub_cover () {
 // The main cover
 module cover () {
     hull () {
-	translate (v = [0, 0, 25 - 37.2 / 2])
+	translate (v = [0, 0, 27 - 37.2 / 2])
             intersection () {
 		sphere (r = 37.2 / 2, $fn = 180);
 		translate (v = [0, 0, 25])
@@ -46,17 +46,23 @@ module cover () {
 
 
 // A single pin - allow 0.4mm space each side for easy sliding in.
-module pin () {
-    cylinder (r = 3.9 / 2 + 0.4, h = 20 + 0.4, center = false, $fn = 36);
+module pin (pin_rad, pin_height) {
+    cylinder (r = pin_rad, h = pin_height, center = false, $fn = 36);
 }
 
 
 // Both pins
 module pins () {
-    translate (v = [-7.5 - 3.9 / 2 - 0.4, 0, 0 - EPS])
-        pin ();
-    translate (v = [ 7.5 + 3.9 / 2 + 0.4, 0, 0 - EPS])
-        pin ();
+    // Pin radius, with 0.4mm clearance each side
+    hole_rad = 3.9 / 2 + 0.4;
+    // Pin length is 20mm + 2mm clearance
+    hole_height = 20.0 + 2.0;
+    // Pin gap varies between 14.2 and 15mm, so use 14.6mm
+    hole_gap = (14.2 + 15.0) / 2;
+    translate (v = [-hole_gap / 2  - hole_rad, 0, 0 - EPS])
+        pin (hole_rad, hole_height);
+    translate (v = [ hole_gap / 2  + hole_rad, 0, 0 - EPS])
+        pin (hole_rad, hole_height);
 }
 
 
@@ -70,11 +76,11 @@ module slot () {
 		translate (v = [0, 0, -EPS])
 	            cover ();
 	    }
-	    cube (size = [3, 50, 50], center = true);
+	    cube (size = [3, 100, 100], center = true);
 	};
 	intersection () {
 	    sub_cover ();
-	    cube (size = [4, 50, 50], center = true);
+	    cube (size = [4, 100, 100], center = true);
 	};
     }
 }

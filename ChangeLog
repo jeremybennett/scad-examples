@@ -1,3 +1,11 @@
+2015-06-01  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* plug-cover-eu.scad (sub_cover, cover): make 2mm taller.
+	(pin): Parameterize
+	(pins): Use variables to calculate parameters for each pin and
+	comment.
+	(slot): Larger cubes for intersections.
+
 2015-05-31  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* plug-cover-eu.scad: Adjust dimensions throughout.
