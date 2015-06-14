@@ -1,3 +1,8 @@
+2015-06-14  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* stand-clamp.scad: Created.
+	* wing-bolt.scad: Created.
+
 2015-06-01  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* plug-cover-eu.scad (sub_cover, cover): make 2mm taller.
