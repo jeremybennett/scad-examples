@@ -8,7 +8,7 @@ module brace () {
 		   cylinder (h = 5, r = 32.5, center = true);
 	   // Right screw hole
 	   translate (v = [28.5,4,4])
-		   cylinder (h = 10, r = 1.75, center = true
+		   cylinder (h = 10, r = 1.75, center = true,
 						 $fn = 12);
 	   // Left screw hole
 	   translate (v = [-28.5,4,4])
