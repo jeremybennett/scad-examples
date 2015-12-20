@@ -1,3 +1,13 @@
+2015-12-20  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* plug-covers/eu-plug.scad: Renamed from plug-cover-eu.scad.
+	* plug-covers/uk-plug.scad: Created.
+	* plug-cover-eu.scad: Renamed to plug-covers/eu.scad
+
+2015-06-14  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* plug-cover-eu.scad (pins): Rotate by 90 degrees.
+
 2015-06-14  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* stand-clamp.scad: Created.

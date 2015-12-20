@@ -20,7 +20,7 @@ EPS = 0.001;
 // Hull inside main cover
 module sub_cover () {
     hull () {
-	translate (v = [0, 0, 27 - 37.2 / 2])
+	translate (v = [0, 0, 30 - 37.2 / 2])
             intersection () {
 		sphere (r = 37.2 / 2 - 2, $fn = 180);
 		translate (v = [0, 0, 25])
@@ -34,7 +34,7 @@ module sub_cover () {
 // The main cover
 module cover () {
     hull () {
-	translate (v = [0, 0, 27 - 37.2 / 2])
+	translate (v = [0, 0, 30 - 37.2 / 2])
             intersection () {
 		sphere (r = 37.2 / 2, $fn = 180);
 		translate (v = [0, 0, 25])
@@ -59,9 +59,9 @@ module pins () {
     hole_height = 20.0 + 2.0;
     // Pin gap varies between 14.2 and 15mm, so use 14.6mm
     hole_gap = (14.2 + 15.0) / 2;
-    translate (v = [-hole_gap / 2  - hole_rad, 0, 0 - EPS])
+    translate (v = [0, -hole_gap / 2  - hole_rad, 0 - EPS])
         pin (hole_rad, hole_height);
-    translate (v = [ hole_gap / 2  + hole_rad, 0, 0 - EPS])
+    translate (v = [0,  hole_gap / 2  + hole_rad, 0 - EPS])
         pin (hole_rad, hole_height);
 }
 
