@@ -14,26 +14,25 @@
 
 // Plug parameters. Primary width is at base of live/neutral pins, secondard
 // width at base of earth pins.
-max_w = 50;
-min_w = 38;
-max_h = 39;
+max_w    = 50;
+min_w    = 38;
+max_h    = 43;
 corner_r = 10;
-ln_y_off = 10;
-e_y_off = 28;
-mink_r = 5;
+ln_y_off = 12;   // Edge to center of pin
+mink_r   =  5;
 
 // Standard UK pin parameters (l = live, n = neutral, e = earth)
-ln_x_sep = 15.4;
-e_y_sep = 14.0;
-ln_x = 6.3;
-ln_y = 4.0;
-ln_z = 18.0;
-e_x = 4.0;
-e_y = 8.0;
-e_z = 22.5;
+ln_x_sep = 22.23;   // center to center (range is 22.10 - 22.36)
+e_y_sep  = 22.23;   // center to center (range is 22.10 - 22.36)
+ln_x     =  6.48;   // max (range is 6.22 - 6.48)
+ln_y     =  4.05;   // max (range is 3.90 - 4.05)
+ln_z     = 18.20;   // max (range is 17.20 - 18.20)
+e_x      =  4.05;   // max (range is 3.90 - 4.05)
+e_y      =  8.05;   // max (range is 7.80 - 8.05)
+e_z      = 23.23;   // max (range is 22.23 - 23.23)
 
 // Spacing parameter in holes
-gap_xy = 0.25;
+gap_xy = 0.4;
 gap_z = 1.0;
 
 // Smooth the curves
@@ -47,9 +46,9 @@ module block_2d () {
 	 * (max_h - 2 * corner_r);
     // Put circles at each corner
     hull () {
-        translate (v = [max_w / 2 - corner_r - mink_r, ln_y_off + mink_r, 0])
+        translate (v = [max_w / 2 - corner_r - mink_r, corner_r + mink_r, 0])
             circle (r = corner_r);
-        translate (v = [-max_w / 2 + corner_r + mink_r, ln_y_off + mink_r, 0])
+        translate (v = [-max_w / 2 + corner_r + mink_r, corner_r + mink_r, 0])
             circle (r = corner_r);
         translate (v = [max_w/2 - corner_r - upper_x_off - mink_r,
 			max_h - corner_r - mink_r, 0])
@@ -89,13 +88,11 @@ module uk_plug () {
 
     difference () {
         rounded_block ();
-        translate (v = [ln_x_sep / 2 + ln_gap_x / 2,
-			corner_r + ln_gap_y / 2, 0])
+        translate (v = [ln_x_sep / 2 + gap_xy, ln_y_off, 0])
             cube (size = [ln_gap_x, ln_gap_y, ln_gap_z * 2], center = true);
-        translate (v = [-ln_x_sep / 2 - ln_gap_x / 2,
-			corner_r + ln_gap_y / 2, 0])
+        translate (v = [-ln_x_sep / 2 - gap_xy / 2, ln_y_off, 0])
             cube (size = [ln_gap_x, ln_gap_y, ln_gap_z * 2], center = true);
-        translate (v = [0, corner_r + ln_y + e_y_sep + e_gap_y / 2, 0])
+        translate (v = [0, ln_y_off + e_y_sep, 0])
             cube (size = [e_gap_x, e_gap_y, e_gap_z * 2], center = true);
     }
 }

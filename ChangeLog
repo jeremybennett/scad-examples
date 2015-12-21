@@ -1,3 +1,9 @@
+2015-12-21  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* plug-covers/uk-plug.scad: Correct pin spacing values from BS
+	data all measured to pin centers and more realistic gaps.
+	(uk_plug): Simpler pin placing using new data.
+
 2015-12-20  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* plug-covers/eu-plug.scad: Renamed from plug-cover-eu.scad.
