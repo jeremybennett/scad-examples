@@ -1,3 +1,7 @@
+2015-12-22 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* plug-covers/uk-plug.scad: Larger gap in the X/Y dimensions.
+
 2015-12-21  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* plug-covers/uk-plug.scad: Correct pin spacing values from BS

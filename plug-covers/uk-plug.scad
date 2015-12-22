@@ -32,7 +32,7 @@ e_y      =  8.05;   // max (range is 7.80 - 8.05)
 e_z      = 23.23;   // max (range is 22.23 - 23.23)
 
 // Spacing parameter in holes
-gap_xy = 0.4;
+gap_xy = 0.6;
 gap_z = 1.0;
 
 // Smooth the curves
