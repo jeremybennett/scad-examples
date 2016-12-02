@@ -1,3 +1,11 @@
+2016-12-02 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	First attempt at a box to hold three microUSB breakout boards on a
+	BB301 breadboard.
+
+	* power-box/power-box.scad: Created.
+	* power-box/power-lid.scad: Created.
+
 2015-12-22 Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* plug-covers/uk-plug.scad: Larger gap in the X/Y dimensions.
