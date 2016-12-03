@@ -13,33 +13,7 @@
 // A container for a circuit board containing microusb power breakout. This is
 // the lid.
 
-
-PILLAR = 8;
-WALL = 3;
-PCB_X = 85 + (PILLAR - WALL) * 2;
-PCB_Y = 46;
-BASE_H = 13;
-DELTA = 0.01;
-H = 23;
-TOP_H = H - BASE_H - WALL * 2;
-USB_W = 9;
-USB_H = 3;
-WIRE_W = 3 * 2.54;
-WIRE_H = 2;
-
-
-module round_cube (x, y, z) {
-    hull () {
-        translate (v = [-x/2 + 3, -y/2 + 3, 0])
-            cylinder (r = 3, h = z, center = true);
-        translate (v = [ x/2 - 3, -y/2 + 3, 0])
-            cylinder (r = 3, h = z, center = true);
-        translate (v = [-x/2 + 3,  y/2 - 3, 0])
-            cylinder (r = 3, h = z, center = true);
-        translate (v = [ x/2 - 3,  y/2 - 3, 0])
-            cylinder (r = 3, h = z, center = true);
-        }
-}
+include <pillar-all.scad>
 
 module sides () {
     translate (v = [PCB_X / 2 + WALL, PCB_Y / 2 + WALL, (TOP_H + WALL) / 2])
@@ -53,7 +27,6 @@ module base () {
     translate (v = [PCB_X / 2 + WALL, PCB_Y / 2 + WALL, WALL / 2])
         round_cube (PCB_X + WALL * 2, PCB_Y + WALL * 2, WALL);
 }
-
 
 module pillars () {
     translate (v = [WALL, WALL, WALL - DELTA])
@@ -71,29 +44,28 @@ module pillars () {
               center = false);
 }
 
-module board_clamp () {
+module usb_clamp () {
     translate (v = [WALL - DELTA, WALL + 5.5, WALL - DELTA])
         cube (size = [PCB_X + DELTA * 2, 2, TOP_H + DELTA], center = false);
-    // Infill
-    translate (v = [WALL, WALL + 2, WALL - DELTA])
-        cube (size = [PILLAR - WALL, PILLAR - WALL, TOP_H + DELTA],
-              center = false);
-    translate (v = [WALL * 2 + PCB_X - PILLAR, WALL, WALL - DELTA])
-        cube (size = [PILLAR - WALL, PILLAR - WALL + 2, TOP_H + DELTA],
-              center = false);
+}
+
+module board_clamp () {
+    translate (v = [WALL - DELTA, WALL + 12, WALL - DELTA])
+        cube (size = [PCB_X + DELTA * 2, 3, TOP_H + 3 + DELTA], center = false);
 }
 
 module wire_clamp () {
-    translate (v = [PILLAR - DELTA, WALL + PCB_Y - 5, WALL - DELTA])
+    translate (v = [PILLAR - DELTA, WALL + PCB_Y - 7, WALL - DELTA])
         cube (size = [PCB_X - (PILLAR -WALL) * 2 + DELTA * 2, 3,
   	              TOP_H + 2 + DELTA], center = false);
 }
 
 module hole () {
     union () {
-        cylinder (h = WALL + TOP_H + DELTA * 2, r = 1.7, $fn = 24,
+        cylinder (h = WALL + BASE_H + DELTA * 2, r = M3_R, $fn = 24,
                   center = false);
-        cylinder (h = 3 + DELTA, r = 3, $fn = 24, center = false);
+        cylinder (h = M3_HEAD_H + DELTA, r = M3_HEAD_R, $fn = 24,
+                  center = false);
     }
 }
 
@@ -128,36 +100,12 @@ module usb_holes () {
         usb_hole ();
 }
 
-module wire_hole () {
-    cube (size = [WIRE_W, WALL * 2, WIRE_H + DELTA], center = false);
-}
-
-module wire_holes () {
-    // Spaced 5 .1" holdes appart
-    translate (v = [PCB_X / 2 + WALL - WIRE_W - 11 * 2.54,
-                    PCB_Y + WALL/2, WALL + TOP_H - WIRE_H])
-        wire_hole ();
-    translate (v = [PCB_X / 2 + WALL - WIRE_W - 6 * 2.54,
-                    PCB_Y + WALL/2, WALL + TOP_H - WIRE_H])
-        wire_hole ();
-    translate (v = [PCB_X / 2 + WALL - WIRE_W - 1 * 2.54,
-                    PCB_Y + WALL/2, WALL + TOP_H - WIRE_H])
-        wire_hole ();
-    translate (v = [PCB_X / 2 + WALL + 1 * 2.54,
-                    PCB_Y + WALL/2, WALL + TOP_H - WIRE_H])
-        wire_hole ();
-    translate (v = [PCB_X / 2 + WALL + 6 * 2.54,
-                    PCB_Y + WALL/2, WALL + TOP_H - WIRE_H])
-        wire_hole ();
-    translate (v = [PCB_X / 2 + WALL + 11 * 2.54,
-                    PCB_Y + WALL/2, WALL + TOP_H - WIRE_H])
-        wire_hole ();
-}
 module power_lid_base () {
     union () {
         sides ();
         base ();
         pillars ();
+	usb_clamp ();
 	board_clamp ();
 	wire_clamp ();
     }
@@ -168,7 +116,6 @@ module power_lid () {
         power_lid_base ();
         holes ();
         usb_holes ();
-	wire_holes ();
     }
 }
 

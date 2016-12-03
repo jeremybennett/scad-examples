@@ -10,28 +10,10 @@
 // Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
 
-// A container for a circuit board containing microusb power breakout.
+// A container for a circuit board containing microusb power breakout. This is
+// the base.
 
-
-PILLAR = 8;
-WALL = 3;
-PCB_X = 85 + (PILLAR - WALL) * 2;
-PCB_Y = 46;
-BASE_H = 13;
-DELTA = 0.01;
-
-module round_cube (x, y, z) {
-    hull () {
-        translate (v = [-x/2 + 3, -y/2 + 3, 0])
-            cylinder (r = 3, h = z, center = true);
-        translate (v = [ x/2 - 3, -y/2 + 3, 0])
-            cylinder (r = 3, h = z, center = true);
-        translate (v = [-x/2 + 3,  y/2 - 3, 0])
-            cylinder (r = 3, h = z, center = true);
-        translate (v = [ x/2 - 3,  y/2 - 3, 0])
-            cylinder (r = 3, h = z, center = true);
-	}
-}
+include <pillar-all.scad>
 
 module sides () {
     translate (v = [PCB_X / 2 + WALL, PCB_Y / 2 + WALL, (BASE_H + WALL) / 2])
@@ -65,9 +47,10 @@ module pillars () {
 
 module hole () {
     union () {
-        cylinder (h = WALL + BASE_H + DELTA * 2, r = 1.7, $fn = 24,
+        cylinder (h = WALL + BASE_H + DELTA * 2, r = M3_R, $fn = 24,
                   center = false);
-        cylinder (h = 2 + DELTA, r = 3, $fn = 6, center = false);
+        cylinder (h = M3_NUT_H + DELTA, r = M3_HEAD_R, $fn = 6,
+                  center = false);
     }
 }
 
@@ -85,6 +68,32 @@ module holes () {
     }
 }
 
+module wire_hole () {
+    cube (size = [WIRE_W, WALL * 2, WIRE_H + DELTA], center = false);
+}
+
+module wire_holes () {
+    // Spaced 5 .1" holdes appart
+    translate (v = [PCB_X / 2 + WALL - WIRE_W - 11 * 2.54,
+                    PCB_Y + WALL/2, WALL + BASE_H - WIRE_H])
+        wire_hole ();
+    translate (v = [PCB_X / 2 + WALL - WIRE_W - 6 * 2.54,
+                    PCB_Y + WALL/2, WALL + BASE_H - WIRE_H])
+        wire_hole ();
+    translate (v = [PCB_X / 2 + WALL - WIRE_W - 1 * 2.54,
+                    PCB_Y + WALL/2, WALL + BASE_H - WIRE_H])
+        wire_hole ();
+    translate (v = [PCB_X / 2 + WALL + 1 * 2.54,
+                    PCB_Y + WALL/2, WALL + BASE_H - WIRE_H])
+        wire_hole ();
+    translate (v = [PCB_X / 2 + WALL + 6 * 2.54,
+                    PCB_Y + WALL/2, WALL + BASE_H - WIRE_H])
+        wire_hole ();
+    translate (v = [PCB_X / 2 + WALL + 11 * 2.54,
+                    PCB_Y + WALL/2, WALL + BASE_H - WIRE_H])
+        wire_hole ();
+}
+
 module power_box_base () {
     union () {
         sides ();
@@ -97,6 +106,7 @@ module power_box () {
     difference () {
         power_box_base ();
         holes ();
+	wire_holes ();
     }
 }
 
