@@ -1,3 +1,14 @@
+2016-12-13 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	First version of components for replacment nut and bolt for a
+	Topeack bottle cage.
+
+	* bottle-holder/.gitignore: Created.
+	* bottle-holder/nut-header.scad: Created.
+	* bottle-holder/nut-holder.scad: Created.
+	* bottle-holder/nut-lock.scad: Created.
+	* bottle-holder/nut-washer.scad: Created.
+
 2016-12-03 Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	Bring together common code and adjust dimensions after first

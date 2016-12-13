@@ -1,0 +1,4 @@
+# Ignore backup files and geneated STL and GCODE
+*~
+*.stl
+*.gcode
