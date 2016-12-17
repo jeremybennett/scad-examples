@@ -1,5 +1,15 @@
 2016-12-17 Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	A LED christmas tree star driven by a cuttlefish.
+
+	* christmas-star/bottom-star.scad: Created.
+	* christmas-star/spacer.scad: Created.
+	* christmas-star/star.scad: Created.
+	* christmas-star/top_star.scad: Created.
+
+
+2016-12-17 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* bottle-holder/nut-header.scad: Adjust dimensions.
 	* bottle-holder/nut-holder.scad: Likewise.
 	* bottle-holder/nut-lock.scad: Likewise.
