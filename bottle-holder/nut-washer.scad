@@ -23,10 +23,10 @@ module hole () {
 
 module washer_block () {
     union () {
-         translate (v = [(WASHER_D + HOLE_D) / 4, 0,
-                         LUG_H / 2 + WASHER_H - DELTA  ])
+        translate (v = [(WASHER_D - LUG_X) / 2, 0,
+                        LUG_H / 2 + WASHER_H - DELTA  ])
             cube (size = [LUG_X, LUG_Y, LUG_H], center = true);
-        translate (v = [-(WASHER_D + HOLE_D) / 4, 0,
+        translate (v = [-(WASHER_D - LUG_X) / 2, 0,
                         LUG_H / 2 + WASHER_H - DELTA  ])
             cube (size = [LUG_X, LUG_Y, LUG_H], center = true);
         cylinder (r = WASHER_D / 2, h = WASHER_H, $fn = 48,

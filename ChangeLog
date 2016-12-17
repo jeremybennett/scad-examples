@@ -1,3 +1,9 @@
+2016-12-17 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* bottle-holder/nut-header.scad: Adjust dimensions.
+	* bottle-holder/nut-holder.scad: Likewise.
+	* bottle-holder/nut-lock.scad: Likewise.
+
 2016-12-13 Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	First version of components for replacment nut and bolt for a

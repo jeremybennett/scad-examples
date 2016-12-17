@@ -16,7 +16,7 @@ include <nut-header.scad>
 
 
 module slot () {
-    translate (v = [50, 0, 1 + LOCK_NUT_H / 2])
+    translate (v = [50, 0, 2 + LOCK_NUT_H / 2])
         cube (size = [100 + LOCK_NUT_X, LOCK_NUT_Y, LOCK_NUT_H],
               center = true);
 }
@@ -30,7 +30,7 @@ module hole () {
 module nut_lock_block () {
     union () {
          translate (v = [ 0, 0,
-                         LUG_H / 2 + LOCK_H - DELTA  ])
+                         HANDLE_H / 2 + LOCK_H - DELTA  ])
             cube (size = [WASHER_D, HANDLE_Y, HANDLE_H], center = true);
         cylinder (r = WASHER_D / 2, h = LOCK_H, $fn = 48,
                   center = false);
