@@ -1,6 +1,6 @@
 // Configurable laptop stand
 
-// Copyright (C) 2016 Embecosm Limited (www.embecosm.com)
+// Copyright (C) 2017 Embecosm Limited (www.embecosm.com)
 
 // Contributor: Jeremy Bennett <jeremy.bennett@embecosm.com>
 
