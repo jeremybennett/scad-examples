@@ -35,7 +35,7 @@ B = 90.0 - A;
 // Breadth of the stand, which since we are printing on our side is the height
 // of the print.
 
-H = 20;
+H = 25;
 
 // Length of the face.  This is the longest part of the stand, so limited by
 // the printer.
@@ -55,9 +55,9 @@ BACK = F * sin (A);
 //   Inside base by w:     y = w
 //   Back:                 x = F * cos (A)
 //   Inside back by w:     x = F * cos (A) - w
-//   Mid split:            y = -tan (A) * x + f * sin (A)
-//   Below mid-split by w: y = -tan A() * x + f * sin (A) - w / cos (A)
-//   Above mid-split by w: y = -tan A() * x + f * sin (A) + w / cos (A)
+//   Mid split:            y = -tan (A) * x + F * sin (A)
+//   Below mid-split by w: y = -tan A() * x + F * sin (A) - w / cos (A)
+//   Above mid-split by w: y = -tan A() * x + F * sin (A) + w / cos (A)
 
 // Solving gives us the following useful intersections for offset lines:
 
@@ -98,8 +98,8 @@ BACK = F * sin (A);
 
 // We return a vector [x, y], where z = 0
 
-function intersect (m1, c1, m2, c2) =
-     [(c2 - c1) / (m1 - m2), m1 * (c2 - c1) / (m1 - m2) + c1, 0];
+function intersect (m1, c1, m2, c2, z = 0) =
+     [(c2 - c1) / (m1 - m2), m1 * (c2 - c1) / (m1 - m2) + c1, z];
 
 
 // Function to computer intersection of 2 lines where one is vertical
@@ -113,28 +113,99 @@ function intersect (m1, c1, m2, c2) =
 
 // We return a vector [x, y, z], where z = 0
 
-function intersect2 (m, c, k) =
-     [k, m * k + c, 0];
+function intersect2 (m, c, k, z = 0) =
+     [k, m * k + c, z];
+
+
+// Function to compute the intercept of a parallel line at a specified offset
+
+// Given a line
+
+//   y = m * x + c
+
+// We compute the parallel line
+
+//   y = m * x + c'
+
+// Such that the second line is a specified distance, w, apart. If w > 0, then
+// c' > c. Result is c'.
+
+function parallel (m, c, w) =
+     (w == 0) ? c :
+     (w > 0) ? c + sqrt (w * w * (m * m + 1)) : c - sqrt (w * w * (m * m + 1));
 
 
 // Block outline of main stand part.
 
-// We use the intersections of OUTER_R inside the main outline:
+// We use the intersections of OUTER_R inside the main outline by w
 
-//   Inside face by w:     y = tan (A) * x - w / cos A
-//   Inside base by w:     y = w
-//   Inside back by w:     x = F * cos (A) - w
+//   Face:     y = tan (A) * x
+//   Case:     y = 0
+//   Back:     x = F * cos (A)
 
 // where w = OUTER_R
 
+
+// Function to compute the center of a circle touching two lines.
+
+// The lines are:
+
+//   y = m1 * x + c1
+//   y = m2 * x + c2
+
+// We assume the first line is clockwise of the second line, which controls
+// which of the four possible circles we find.
+
+function cc (m1, c1, m2, c2, r, z = 0) =
+     let (start = intersect (m1, c1, m2, c2, z),
+	  B = atan (m1),
+	  D = atan ((m2 - m1) / (1 + m1 * m2)),
+	  E = D / 2.0,
+	  b = r / sin (E),
+	  xinc = b * cos (E + B),
+	  yinc = b * sin (E + B))
+     [start [0] + xinc, start[1] + yinc, z];
+
+
+// Function to compute the center of a circle touching two lines, one of which
+// is vertical.
+
+// We assume the first line is clockwise of the second line, which controls
+// which of the four possible circles we find.
+
+function cc2 (m, c, k, r, z = 0) =
+     let (start = intersect (m1, c1, m2, c2, z),
+	  B = atan (m1),
+	  D = atan ((m2 - m1) / (1 + m1 * m2)),
+	  E = D / 2.0,
+	  b = r / sin (E),
+	  xinc = b * cos (E + B),
+	  yinc = b * sin (E + B))
+     [start [0] + xinc, start[1] + yinc, z];
+
+
 module main_block () {
      w = OUTER_R;
+
      hull () {
-	  translate (v = intersect (tan(A), -w / cos (A), 0, w))
-	       cylinder (r = w, h = H, center = false, $fn = 24);
-	  translate (v = intersect2 (0, w, F * cos (A) - w))
-	       cylinder (r = w, h = H, center = false, $fn = 24);
-	  translate (v = intersect2 (tan(A), w / cos (A), F * cos (A) - w))
+	  translate (v = cc (m1 = 0,
+			     c1 = 0,
+			     m2 = tan(A),
+			     c2 = 0,
+			     r = w,
+			     z = 0))
+	       cylinder (r = OUTER_R, h = H, center = false, $fn = 24);
+	  translate (v = intersect2 (m = 0,
+				     c = w,
+				     k = F * cos (A) - w,
+			             z = 0))
+	       cylinder (r = OUTER_R, h = H, center = false, $fn = 24);
+	  translate (v = intersect2 (m = tan (A),
+				     c = parallel (m = tan (A),
+						   c = 0,
+						   w = -w),
+				     k = F * cos (A) - w,
+			             z = 0))
 	       cylinder (r = OUTER_R, h = H, center = false, $fn = 24);
      }
 }
@@ -142,22 +213,82 @@ module main_block () {
 
 // Lower hole
 
+// We use the intersection of OUTER_R inside the main outline and a line
+// parallel to the mid-split line by OUTER_R / 2.  The mid-split line is
+
+//    y = -tan (A) * x + F * sin (A)
+
 module lo_hole () {
-     a = A / 2.0;
-     b = (90 - A) / 2;
-     y1 = OUTER_R;
-     x1 = y1 / tan (a);
-     y2 = OUTER_R;
-     x2 = BASE + (T / 2 * sin (A)) - OUTER_R / tan (a);
-     y3 = BACK - OUTER_R / tan (b);
-     x3 = x2;
+     w1 = OUTER_R;
+     w2 = OUTER_R / 1.5;
+
      hull () {
-	  translate (v = [x1, y1, -H])
-	       cylinder (r = INNER_R, h = 3 * H, center = false, $fn = 24);
-	  translate (v = [x2, y2, -H])
-	       cylinder (r = INNER_R, h = 3 * H, center = false, $fn = 24);
-	  translate (v = [x3, y3, -H])
-	       cylinder (r = INNER_R, h = 3 * H, center = false, $fn = 24);
+	  translate (v = intersect (m1 = tan (A),
+				    c1 = parallel (m = tan (A),
+						   c = 0,
+						   w = -w1),
+				    m2 = 0,
+				    c2 = w1,
+				    z = -H))
+	       cylinder (r = INNER_R, h = H * 3, center = false, $fn = 24);
+	  translate (v = intersect (m1 = -tan (A),
+				    c1 = parallel (m = -tan (A),
+						   c = F * sin (A),
+						   w = -w2),
+				    m2 = tan (A),
+				    c2 = parallel (m = tan (A),
+						   c = 0,
+						   w = -w1),
+			            z = -H))
+	       cylinder (r = INNER_R, h = H * 3, center = false, $fn = 24);
+	  translate (v = intersect (m1 = 0,
+				    c1 = w1,
+				    m2 = -tan (A),
+				    c2 = parallel (m = -tan (A),
+						   c = F * sin (A),
+						   w = -w2),
+			            z = -H))
+	       cylinder (r = INNER_R, h = H * 3, center = false, $fn = 24);
+     }
+}
+
+
+// Upper hole
+
+// We use the intersection of OUTER_R inside the main outline and a line
+// parallel to the mid-split line by OUTER_R / 2.  The mid-split line is
+
+//    y = -tan (A) * x + F * sin (A)
+
+module hi_hole () {
+     w1 = OUTER_R;
+     w2 = OUTER_R / 1.5;
+
+     hull () {
+	  translate (v = intersect (m1 = -tan (A),
+				    c1 = parallel (m = -tan (A),
+						   c = F * sin (A),
+						   w = w2),
+				    m2 = tan (A),
+				    c2 = parallel (m = tan (A),
+						   c = 0,
+						   w = -w1),
+			            z = -H))
+	       cylinder (r = INNER_R, h = H * 3, center = false, $fn = 24);
+	  translate (v = intersect2 (m = tan (A),
+				     c = parallel (m = tan (A),
+						   c = 0,
+						   w = -w1),
+				     k = F * cos (A) - w1,
+				     z = -H))
+	       cylinder (r = INNER_R, h = H * 3, center = false, $fn = 24);
+	  translate (v = intersect2 (m = -tan (A),
+				     c = parallel (m = -tan (A),
+						   c = F * sin (A),
+						   w = w2),
+				     k = F * cos (A) - w1,
+			            z = -H))
+	       cylinder (r = INNER_R, h = H * 3, center = false, $fn = 24);
      }
 }
 
@@ -167,7 +298,8 @@ module lo_hole () {
 module stand () {
      difference () {
 	  main_block ();
-//	  lo_hole ();
+	  lo_hole ();
+	  hi_hole ();
      }
 }
 

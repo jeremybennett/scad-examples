@@ -1,4 +1,8 @@
-2017-07-18 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-07-22 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* laptop-stand/laptop-stand.scad (cc, cc2): Created.
+
+2017-07-22 Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* curtain-rail-hook.scad: Really created!
 
