@@ -20,13 +20,13 @@ EPS = 0.001;
 // Hull inside main cover
 module sub_cover () {
     hull () {
-	translate (v = [0, 0, 30 - 37.2 / 2])
+	translate (v = [0, 0, 30 - 38.2 / 2])
             intersection () {
-		sphere (r = 37.2 / 2 - 2, $fn = 180);
+		sphere (r = 38.2 / 2 - 2, $fn = 180);
 		translate (v = [0, 0, 25])
 	            cube (size = [50, 50, 50], center = true);
 	    }
-	cylinder (r = 37.2 / 2 - 2, h = EPS, center = false, $fn = 180);
+	cylinder (r = 38.2 / 2 - 2, h = EPS, center = false, $fn = 180);
     }
 }
 
@@ -34,13 +34,13 @@ module sub_cover () {
 // The main cover
 module cover () {
     hull () {
-	translate (v = [0, 0, 30 - 37.2 / 2])
+	translate (v = [0, 0, 30 - 38.2 / 2])
             intersection () {
-		sphere (r = 37.2 / 2, $fn = 180);
+		sphere (r = 38.2 / 2, $fn = 180);
 		translate (v = [0, 0, 25])
 	            cube (size = [50, 50, 50], center = true);
 	    }
-	cylinder (r = 37.2 / 2, h = EPS, center = false, $fn = 180);
+	cylinder (r = 38.2 / 2, h = EPS, center = false, $fn = 180);
     }
 }
 

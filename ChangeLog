@@ -1,5 +1,10 @@
 2017-11-12 Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* plug-covers/us-plug.scad (sub_cover, cover): Increase diameter
+	to 38.2.
+
+2017-11-12 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* plug-covers/us-plug.scad: Fix comments to say US, not EU and
 	copyright dates.
 
