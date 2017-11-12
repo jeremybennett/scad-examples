@@ -1,5 +1,10 @@
 2017-11-12 Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* plug-covers/us-plug.scad: Fix comments to say US, not EU and
+	copyright dates.
+
+2017-11-12 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* plug-covers/us-plug.scad: Created.
 
 2017-11-12 Jeremy Bennett  <jeremy.bennett@embecosm.com>

@@ -1,6 +1,6 @@
-// Plug cover (EU version)
+// Plug cover (US version)
 
-// Copyright (C) 2015 Embecosm Limited (www.embecosm.com)
+// Copyright (C) 2015-2017 Embecosm Limited (www.embecosm.com)
 
 // Contributor: Jeremy Bennett <jeremy.bennett@embecosm.com>
 
@@ -10,7 +10,7 @@
 // Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
 
-// A cover for an EU plug, to prevent pins destroying your bag.
+// A cover for an US plug, to prevent pins destroying your bag.
 
 
 // Very small value
