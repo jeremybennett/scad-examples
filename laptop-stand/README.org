@@ -1,0 +1,30 @@
+
+//   Inside face by w:     y = tan (A) * x - w / cos A
+//   Inside base by w:     y = w
+//   Inside back by w:     x = F * cos (A) - w
+//   Mid split:            y = -tan (A) * x + f * sin (A)
+//   Below mid-split by w: y = -tan A() * x + f * sin (A) - w / cos (A)
+//   Above mid-split by w: y = -tan A() * x + f * sin (A) + w / cos (A)
+
+// Solving gives us the following useful intersections for offset lines:
+
+// Face (w) & base (w): (w / tan (A / 2), w)
+
+// Back (w) & base (w): (F * cos (A) - w, w)
+
+// Face (w) & back (w): (F * cos (A) - w, F * sin (A) - w / tan (B / 2)
+
+// Mid-split (+w1) & base (w2): (1 / tan (A) * (F * sin (A) + w1 / cos (A)
+//                                              - w2), w2)
+
+// Mid-split (+w1) & face (w2): (1/2 * (F * cos (A) + (w1 - w2)
+//                                                 / (tan (A) * cos (A))),
+//                               1/2 * (F * sin (A) - (w1 + w2 * (1 - tan (A)))
+//                                                  / cos (A)))
+
+// Mid-split (-w1) & face (w2): (1/2 * (F * cos (A) - (w1 + w2)
+//                                                 / (tan (A) * cos (A))),
+//                               1/2 * (F * sin (A) + (w1 - w2 * (1 - tan (A)))
+//                                                  / cos (A)))
+
+// Mid-split (-w1) & back (w2): (F * cos (A) - w2, (w2* sin (A) + w1) / cos (A))

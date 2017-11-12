@@ -1,89 +1,29 @@
-// Configurable laptop stand
+// General
+// -------
 
-// Copyright (C) 2017 Embecosm Limited (www.embecosm.com)
+// Vertical lines are represented as vectors [TRUE, x_intercept]
+// All other lines are represented as vectors [FALSE, m, c]
+// Points are represented as vectors [x ,y, z]
 
-// Contributor: Jeremy Bennett <jeremy.bennett@embecosm.com>
-
-// This file is licensed under the Creative Commons Attribution-ShareAlike 3.0
-// Unported License. To view a copy of this license, visit
-// http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative
-// Commons, PO Box 1866, Mountain View, CA 94042, USA.
-
-
-// Measure the laptop thickness from the desk to the flat with the laptop
-// open.
-
-LAPTOP_T = 22;
-
-// Thickness of the wall
-
-T = 3.0;
-
-// Degree of rounding of the inner edges
-
-INNER_R = 1.5;
-
-// Degree of rounding of the outer edges
-
-OUTER_R = INNER_R + T;
-
-// Angle of the stand, plus it opposite angle
-
-A = 60.0;
-B = 90.0 - A;
-
-// Breadth of the stand, which since we are printing on our side is the height
-// of the print.
-
-H = 25;
-
-// Length of the face.  This is the longest part of the stand, so limited by
-// the printer.
-
-F = 200.0;
-
-// Other edges, base and back
-
-BASE = F * cos (A);
-BACK = F * sin (A);
-
-// Various lines of use to us
-
-//   Face:                 y = tan (A) * x + 0
-//   Inside face by w:     y = tan (A) * x - w / cos A
-//   Base:                 y = 0
-//   Inside base by w:     y = w
-//   Back:                 x = F * cos (A)
-//   Inside back by w:     x = F * cos (A) - w
-//   Mid split:            y = -tan (A) * x + F * sin (A)
-//   Below mid-split by w: y = -tan A() * x + F * sin (A) - w / cos (A)
-//   Above mid-split by w: y = -tan A() * x + F * sin (A) + w / cos (A)
-
-// Solving gives us the following useful intersections for offset lines:
-
-// Face (w) & base (w): (w / tan (A / 2), w)
-
-// Back (w) & base (w): (F * cos (A) - w, w)
-
-// Face (w) & back (w): (F * cos (A) - w, F * sin (A) - w / tan (B / 2)
-
-// Mid-split (+w1) & base (w2): (1 / tan (A) * (F * sin (A) + w1 / cos (A)
-//                                              - w2), w2)
-
-// Mid-split (+w1) & face (w2): (1/2 * (F * cos (A) + (w1 - w2)
-//                                                 / (tan (A) * cos (A))),
-//                               1/2 * (F * sin (A) - (w1 + w2 * (1 - tan (A)))
-//                                                  / cos (A)))
-
-// Mid-split (-w1) & face (w2): (1/2 * (F * cos (A) - (w1 + w2)
-//                                                 / (tan (A) * cos (A))),
-//                               1/2 * (F * sin (A) + (w1 - w2 * (1 - tan (A)))
-//                                                  / cos (A)))
-
-// Mid-split (-w1) & back (w2): (F * cos (A) - w2, (w2* sin (A) + w1) / cos (A))
+// Note: We could more compactly represent vertical lines as scalars and use
+//       vectors for all other lines, relying on len () which returns undef on
+//       scalars to distinguish them. However our approach provides an element
+//       of redundancy which can be helpful.
 
 
-// Function to compute intersection of 2 lines
+// Function to report if a line is vertical
+
+function isvert (l) =
+     l[0];
+
+
+// Function to report if a line is horizontal
+
+function ishoriz (l) =
+     (!isvert (l)) && (l[1] == 0);
+
+
+// Function to compute intersection of 2 lines, neither of which is vertical
 
 //   y = m1 * x + c1
 //   y = m2 * x + c2
@@ -96,10 +36,13 @@ BACK = F * sin (A);
 
 //   y = m1 * (c2 - c1) / (m1 - m2) + c1
 
-// We return a vector [x, y], where z = 0
+// We return a point [x, y], where x and y are both UNDEF if the lines are
+// parallel.
 
-function intersect (m1, c1, m2, c2, z = 0) =
-     [(c2 - c1) / (m1 - m2), m1 * (c2 - c1) / (m1 - m2) + c1, z];
+function intersect1 (l1, l2) =
+     let (m1 = l1[1], c1 = l1[2], m2 = l2[1], c2 = l2[2])
+     (m1 == m2) ? [undef, undef, 0]
+                : [(c2 - c1) / (m1 - m2), m1 * (c2 - c1) / (m1 - m2) + c1, 0];
 
 
 // Function to computer intersection of 2 lines where one is vertical
@@ -111,184 +54,212 @@ function intersect (m1, c1, m2, c2, z = 0) =
 
 //   y = m * k + c
 
-// We return a vector [x, y, z], where z = 0
+// Note that the second line is always the vertical one
 
-function intersect2 (m, c, k, z = 0) =
-     [k, m * k + c, z];
+// We return a pint [x, y, 0]
+
+function intersect2 (l1, l2) =
+     let (m = l1[1], c = l1[2], k = l2[1])
+     [k, m * k + c, 0];
 
 
-// Function to compute the intercept of a parallel line at a specified offset
+// Function to compute intersection of 2 lines, one of which may be vertical
 
-// Given a line
+// Returns a point [x,y], where x and y are both UNDEF if we are asked for the
+// intersection of two vertical lines.
 
-//   y = m * x + c
+function intersect (l1, l2) =
+     (isvert (l1) ? (isvert (l2) ? [undef, undef] : intersect2 (l2, l1))
+                  : (isvert (l2) ? intersect2 (l1, l2) : intersect1 (l1, l2)));
 
-// We compute the parallel line
 
-//   y = m * x + c'
+// Function to compute the equation of a non-vertical parallel line
 
-// Such that the second line is a specified distance, w, apart. If w > 0, then
-// c' > c. Result is c'.
+// Given y = m * x + c
 
-function parallel (m, c, w) =
-     (w == 0) ? c :
-     (w > 0) ? c + sqrt (w * w * (m * m + 1)) : c - sqrt (w * w * (m * m + 1));
+// The line r above (below if r is negative) has the equation
+
+//   y = m * x + c + r / sqrt (1 + m^2)
+
+// We return the line [FALSE, m, c + r / sqrt (1 + m^2)]
+
+function parallel_line1 (l, r) =
+     let (m = l[1], c = l[2])
+     [false, m, c + r / sqrt (1 + m * m)];
+
+
+// Function to compute the equation of a vertical parallel line
+
+// Given x = k
+
+// The line r to the right left if r is negative) has the equation
+
+//   x = k + r;
+
+// We return the line [TRUE, k + r]
+
+function parallel_line2 (l, r) =
+     let (k = l[1])
+     [true, k + r];
+
+
+// Function to compute the equation of a parallel line
+
+// This function works for vertical and non-vertical lines
+
+// We return the parallel line
+
+function parallel_line (l, r) =
+     (isvert (l) ? parallel_line2 (l, r) : parallel_line1 (l, r));
+
+
+// Function to compute a perpendicular line which passes through a point,
+// where neither the original line, nor the resulting one are vertical.
+
+// Let the originating line be:
+
+//    y = m * x + c
+
+// and the point of intersection be (x1, y1)
+
+// The gradient of the resulting line, m' = -1/m
+// The intercept, c' = y1 + x1 / m
+
+// Return the resulting line [FALSE, m', c']
+
+function perpendicular_line1 (l, p) =
+     let (m = l[1], c = l[2], x1 = p[0], y1 = p [1])
+     [false, -1 / m, y1 + x1 / m];
+
+
+// Function to compute a perpendicular line which passes through a point where
+// the original line is vertical.
+
+// Let the originating line be:
+
+//    x = k
+
+// and the point of intersection be (x1, y1)
+
+// The gradient of the resulting line, m' = 0
+// The intercept, c' = y1
+
+// Return the resulting line [FALSE, m', c']
+
+function perpendicular_line2 (l, p) =
+     let (y1 = p[1])
+     [false, 0, y1];
+
+
+// Function to compute a perpendicular line which passes through a point where
+// the resulting line is vertical.
+
+// Let the originating line be:
+
+//    y = c
+
+// and the point of intersection be (x1, y1)
+
+// The x-intercept of the resulting line, k = x1
+
+// Return the resulting line [TRUE, k]
+
+function perpendicular_line3 (l, p) =
+     let (x1 = p[0])
+     [true, x1];
+
+
+// Function to compute a perpendicular line which passes through a point
+
+// We have to deal with the special cases where either the starting line or
+// the resulting line may be vertical
+
+// We return the resulting line
+
+function perpendicular_line (l, p) =
+     (isvert (l) ? perpendicular_line2 (l, p)
+                 : (ishoriz (l) ? perpendicular_line3 (l, p)
+                                : perpendicular_line1 (l, p)));
+
+// The lines which outline the stand
+
+//   Face:  y = tan (A) * x + 0  ([FALSE, tan (A), 0])
+//   Base:  y = 0                ([FALSE, 0, 0])
+//   Back:  x = F * cos (A)      ([TRUE, F * cos (A)])
+
+face_line = [false, tan (A), 0];
+base_line = [false, 0, 0];
+back_line = [true, F * cos (A)];
+
+
+// The diagonal split perpendicular to the face and intersecting the meeting
+// point of the back and base
+
+mid_line = perpendicular_line (face_line, intersect (base_line, back_line));
 
 
 // Block outline of main stand part.
 
-// We use the intersections of OUTER_R inside the main outline by w
+// We use the intersections of OUTER_R inside the main outline:
 
-//   Face:     y = tan (A) * x
-//   Case:     y = 0
-//   Back:     x = F * cos (A)
+//   Inside face by w:     y = tan (A) * x - w / cos A
+//   Inside base by w:     y = w
+//   Inside back by w:     x = F * cos (A) - w
 
 // where w = OUTER_R
 
-
-// Function to compute the center of a circle touching two lines.
-
-// The lines are:
-
-//   y = m1 * x + c1
-//   y = m2 * x + c2
-
-// We assume the first line is clockwise of the second line, which controls
-// which of the four possible circles we find.
-
-function cc (m1, c1, m2, c2, r, z = 0) =
-     let (start = intersect (m1, c1, m2, c2, z),
-	  B = atan (m1),
-	  D = atan ((m2 - m1) / (1 + m1 * m2)),
-	  E = D / 2.0,
-	  b = r / sin (E),
-	  xinc = b * cos (E + B),
-	  yinc = b * sin (E + B))
-     [start [0] + xinc, start[1] + yinc, z];
-
-
-// Function to compute the center of a circle touching two lines, one of which
-// is vertical.
-
-// We assume the first line is clockwise of the second line, which controls
-// which of the four possible circles we find.
-
-function cc2 (m, c, k, r, z = 0) =
-     let (start = intersect (m1, c1, m2, c2, z),
-	  B = atan (m1),
-	  D = atan ((m2 - m1) / (1 + m1 * m2)),
-	  E = D / 2.0,
-	  b = r / sin (E),
-	  xinc = b * cos (E + B),
-	  yinc = b * sin (E + B))
-     [start [0] + xinc, start[1] + yinc, z];
-
-
 module main_block () {
      w = OUTER_R;
-
      hull () {
-	  translate (v = cc (m1 = 0,
-			     c1 = 0,
-			     m2 = tan(A),
-			     c2 = 0,
-			     r = w,
-			     z = 0))
-	       cylinder (r = OUTER_R, h = H, center = false, $fn = 24);
-	  translate (v = intersect2 (m = 0,
-				     c = w,
-				     k = F * cos (A) - w,
-			             z = 0))
-	       cylinder (r = OUTER_R, h = H, center = false, $fn = 24);
-	  translate (v = intersect2 (m = tan (A),
-				     c = parallel (m = tan (A),
-						   c = 0,
-						   w = -w),
-				     k = F * cos (A) - w,
-			             z = 0))
-	       cylinder (r = OUTER_R, h = H, center = false, $fn = 24);
+	  translate (v = intersect (parallel_line (base_line, w),
+				    parallel_line (face_line, -w)))
+	       cylinder (r = w, h = H, center = true, $fn = 24);
+	  translate (v = intersect (parallel_line (back_line, -w),
+				    parallel_line (base_line, w)))
+	       cylinder (r = w, h = H, center = true, $fn = 24);
+	  translate (v = intersect (parallel_line (face_line, -w),
+				    parallel_line (back_line, -w)))
+	       cylinder (r = w, h = H, center = true, $fn = 24);
      }
 }
 
 
 // Lower hole
 
-// We use the intersection of OUTER_R inside the main outline and a line
-// parallel to the mid-split line by OUTER_R / 2.  The mid-split line is
-
-//    y = -tan (A) * x + F * sin (A)
-
 module lo_hole () {
      w1 = OUTER_R;
-     w2 = OUTER_R / 1.5;
-
+     w2 = INNER_R;
+     h = H + DELTA;
      hull () {
-	  translate (v = intersect (m1 = tan (A),
-				    c1 = parallel (m = tan (A),
-						   c = 0,
-						   w = -w1),
-				    m2 = 0,
-				    c2 = w1,
-				    z = -H))
-	       cylinder (r = INNER_R, h = H * 3, center = false, $fn = 24);
-	  translate (v = intersect (m1 = -tan (A),
-				    c1 = parallel (m = -tan (A),
-						   c = F * sin (A),
-						   w = -w2),
-				    m2 = tan (A),
-				    c2 = parallel (m = tan (A),
-						   c = 0,
-						   w = -w1),
-			            z = -H))
-	       cylinder (r = INNER_R, h = H * 3, center = false, $fn = 24);
-	  translate (v = intersect (m1 = 0,
-				    c1 = w1,
-				    m2 = -tan (A),
-				    c2 = parallel (m = -tan (A),
-						   c = F * sin (A),
-						   w = -w2),
-			            z = -H))
-	       cylinder (r = INNER_R, h = H * 3, center = false, $fn = 24);
+	  translate (v = intersect (parallel_line (base_line, w1),
+				    parallel_line (face_line, -w1)))
+	       cylinder (r = w2, h = h, center = true, $fn = 24);
+	  translate (v = intersect (parallel_line (mid_line, -w1),
+				    parallel_line (base_line, w1)))
+	       cylinder (r = w2, h = h, center = true, $fn = 24);
+	  translate (v = intersect (parallel_line (face_line, -w1),
+				    parallel_line (mid_line, -w1)))
+	       cylinder (r = w2, h = h, center = true, $fn = 24);
      }
 }
 
 
 // Upper hole
 
-// We use the intersection of OUTER_R inside the main outline and a line
-// parallel to the mid-split line by OUTER_R / 2.  The mid-split line is
-
-//    y = -tan (A) * x + F * sin (A)
-
 module hi_hole () {
      w1 = OUTER_R;
-     w2 = OUTER_R / 1.5;
-
+     w2 = INNER_R;
+     h = H + DELTA;
      hull () {
-	  translate (v = intersect (m1 = -tan (A),
-				    c1 = parallel (m = -tan (A),
-						   c = F * sin (A),
-						   w = w2),
-				    m2 = tan (A),
-				    c2 = parallel (m = tan (A),
-						   c = 0,
-						   w = -w1),
-			            z = -H))
-	       cylinder (r = INNER_R, h = H * 3, center = false, $fn = 24);
-	  translate (v = intersect2 (m = tan (A),
-				     c = parallel (m = tan (A),
-						   c = 0,
-						   w = -w1),
-				     k = F * cos (A) - w1,
-				     z = -H))
-	       cylinder (r = INNER_R, h = H * 3, center = false, $fn = 24);
-	  translate (v = intersect2 (m = -tan (A),
-				     c = parallel (m = -tan (A),
-						   c = F * sin (A),
-						   w = w2),
-				     k = F * cos (A) - w1,
-			            z = -H))
-	       cylinder (r = INNER_R, h = H * 3, center = false, $fn = 24);
+	  translate (v = intersect (parallel_line (back_line, -w1),
+				    parallel_line (face_line, -w1)))
+	       cylinder (r = w2, h = h, center = true, $fn = 24);
+	  translate (v = intersect (parallel_line (mid_line, w1),
+				    parallel_line (back_line, -w1)))
+	       cylinder (r = w2, h = h, center = true, $fn = 24);
+	  translate (v = intersect (parallel_line (face_line, -w1),
+				    parallel_line (mid_line, w1)))
+	       cylinder (r = w2, h = h, center = true, $fn = 24);
      }
 }
 
@@ -304,5 +275,6 @@ module stand () {
 }
 
 
+echo (intersect (base_line, back_line));
+echo (mid_line);
 stand ();
-
