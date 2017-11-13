@@ -14,38 +14,58 @@
 
 
 // Very small value
-EPS = 0.001;
+
+EPS = 0.01;
+
+// Diameter overall
+
+D = 38;
+
+// Height overall
+
+H = 20;
+
+// Rounding
+
+ROUND = 5;
+
+// Slot depth and width
+
+SDEPTH = 3;
+SWIDTH = 4;
 
 
-// Hull inside main cover
-module sub_cover () {
-    hull () {
-	translate (v = [0, 0, 30 - 38.2 / 2])
-            intersection () {
-		sphere (r = 38.2 / 2 - 2, $fn = 180);
-		translate (v = [0, 0, 25])
-	            cube (size = [50, 50, 50], center = true);
-	    }
-	cylinder (r = 38.2 / 2 - 2, h = EPS, center = false, $fn = 180);
-    }
+// Generic dome used for the cover
+
+module dome (rin, hin) {
+     intersection ()
+     {
+	  minkowski () {
+	       cylinder (r = rin - ROUND, h = (hin - ROUND) * 2 , center = true,
+			 $fn = 60);
+	       sphere (r = ROUND, center = true, $fn = 60);
+	  }
+	  translate (v = [-50, -50, 0])
+	       cube (size = [100,100,50], center = false);
+     }
 }
 
 
-// The main cover
-module cover () {
-    hull () {
-	translate (v = [0, 0, 30 - 38.2 / 2])
-            intersection () {
-		sphere (r = 38.2 / 2, $fn = 180);
-		translate (v = [0, 0, 25])
-	            cube (size = [50, 50, 50], center = true);
-	    }
-	cylinder (r = 38.2 / 2, h = EPS, center = false, $fn = 180);
-    }
+// Slot for a rubber band
+
+module slot () {
+     intersection () {
+	  difference () {
+	       dome (D / 2 + EPS, H + EPS);
+	       dome (D / 2 - SDEPTH, H - SDEPTH);
+	  }
+	  cube (size = [100, SWIDTH, 100], center = true);
+     }
 }
 
 
 // A single pin - allow 0.4mm space each side for easy sliding in.
+
 module pin (pin_x, pin_y, pin_z) {
      translate (v = [0, 0, pin_z / 2])
 	  cube  (size = [pin_x, pin_y, pin_z], center = true);
@@ -54,6 +74,7 @@ module pin (pin_x, pin_y, pin_z) {
 
 // Both pins. Pins are 6.5 x 1.5 x 15.9. Allow 0.4mm clearance each side and
 // 2mm at the hole bottom. Pin centres are 12.7 appart.
+
 module pins () {
     hole_x = 6.5 + 0.4 * 2;
     hole_y = 1.5 + 0.4 * 2;
@@ -66,33 +87,13 @@ module pins () {
 }
 
 
-// Slot for rubber band
-module slot () {
-    difference () {
-	intersection () {
-	    union () {
-		translate (v = [0, 0,  EPS])
-	            cover ();
-		translate (v = [0, 0, -EPS])
-	            cover ();
-	    }
-	    cube (size = [3, 100, 100], center = true);
-	};
-	intersection () {
-	    sub_cover ();
-	    cube (size = [4, 100, 100], center = true);
-	};
-    }
-}
-
-
 module plug_cover () {
     difference () {
-	cover ();
+	dome (D/2, H);
 	pins ();
 	slot ();
     }
 }
 
-
 plug_cover ();
+

@@ -1,3 +1,14 @@
+2017-11-13 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	A version which looks different (flatter top) to the EU plug to
+	avoid mix ups. Also faster rendering.
+
+	* plug-covers/us-plug.scad: Parameterize dimensions
+	(sub_cover, cover): Deleted.
+	(dome): Created.
+	(slot): Rewritten to use dome function.
+	(plug_cover): Use dome instead of cover function.
+
 2017-11-12 Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* plug-covers/us-plug.scad (sub_cover, cover): Increase diameter
