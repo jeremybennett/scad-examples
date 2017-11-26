@@ -17,10 +17,10 @@
 
 
 // Small amount to ensure overaps when needed
-EPS = 0.001;
+EPS = 0.01;
 
 // Amount around threads, heads etc, to allow for printer overflow
-GAP = 0.2;
+GAP = 0.3;
 
 // Standard constants
 M3_SHANK_R = 3.0 / 2 + GAP;
@@ -41,9 +41,9 @@ module  wing_block () {
     cr = SHANK_R / 2;
     hull () {
         // Left
-        translate (v = [SHANK_R * 4, SHANK_R, 0])
+        translate (v = [SHANK_R * 6, SHANK_R, 0])
             cylinder (r = cr, h = HEIGHT, center = true, $fn = 24);
-        translate (v = [SHANK_R * 4, -SHANK_R, 0])
+        translate (v = [SHANK_R * 6, -SHANK_R, 0])
             cylinder (r = cr, h = HEIGHT, center = true, $fn = 24);
         // Center
         translate (v = [0, 2 * SHANK_R, 0])
@@ -51,9 +51,9 @@ module  wing_block () {
         translate (v = [0, -2 * SHANK_R, 0])
             cylinder (r = cr, h = HEIGHT, center = true, $fn = 24);
         // Right
-        translate (v = [-SHANK_R * 4, SHANK_R, 0])
+        translate (v = [-SHANK_R * 6, SHANK_R, 0])
             cylinder (r = cr, h = HEIGHT, center = true, $fn = 24);
-        translate (v = [-SHANK_R * 4, -SHANK_R, 0])
+        translate (v = [-SHANK_R * 6, -SHANK_R, 0])
             cylinder (r = cr, h = HEIGHT, center = true, $fn = 24);
     }
 }

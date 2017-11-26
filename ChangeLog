@@ -1,4 +1,10 @@
-2017-11-18 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-11-26 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* music-stand/stand-clamp.scad: Print both top and bottom and
+	bigger clearance.
+	* music-stand/wing-bolt.scad: Make wider, and bigger clearance.
+
+2017-11-26 Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* laptop-stand/laptop-stand.scad: Fix accidental over-editing.
 	* music-stand/stand-clamp.scad: Renamed from stand-clamp.scad.

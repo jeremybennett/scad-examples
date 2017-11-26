@@ -28,7 +28,7 @@
 EPS = 0.001;
 
 // Amount around shanks, heads etc, to allow for printer overflow
-GAP = 0.2;
+GAP = 0.3;
 
 // Standard constants
 M3_SHANK_R = 3.0 / 2 + GAP;
@@ -125,17 +125,15 @@ module clamp_bottom () {
     intersection () {
         clamp ();
         translate (v = [0, 0, -DEPTH])
-             ube (size = [LENGTH * 2, BREADTH * 2, DEPTH *2], center = true);
+             cube (size = [LENGTH * 2, BREADTH * 2, DEPTH *2], center = true);
     }
 }
 
 
-IS_TOP = true;
-
-if (IS_TOP) {
-     // Invert for printing
+// Invert for printing
+translate (v = [0, BREADTH / 2 + 2, DEPTH / 2])
      rotate (a = [180, 0, 0])
-         clamp_top ();
-} else {
+          clamp_top ();
+
+translate (v = [0, -BREADTH / 2 - 2, DEPTH / 2])
      clamp_bottom ();
-}
