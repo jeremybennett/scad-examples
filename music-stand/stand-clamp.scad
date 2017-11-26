@@ -41,18 +41,18 @@ M5_HEAD_R   = 8.0 / 2 + GAP;
 // Constants defining the design
 SHANK_R = M3_SHANK_R;                 // Main construction bolts
 HEAD_R   = M3_HEAD_R;
-HEAD_H   = 4.0;
-NUT_H    = 3.0;
+HEAD_H   = 3.5;
+NUT_H    = 2.5;
 LENGTH   = 20.0;
 
 WING_SHANK_R = M4_SHANK_R;            // Wing bolt for locking
 WING_HEAD_R   = M4_HEAD_R;
 
-LENGTH  = 25.0;                         // Block dimensions
-BREADTH = 20.0;
+LENGTH  = 30.0;                       // Block dimensions
+BREADTH = 30.0;
 DEPTH   = 20.0;
 
-BAR_R = 7.6 / 2 + GAP;                  // The main bar being clamped
+BAR_R = 10.9 / 2 + GAP * 2;           // The main bar being clamped
 
 
 // The basic block with a horizontal hole in it
