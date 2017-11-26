@@ -1,3 +1,52 @@
+// Configurable laptop stand
+
+// Copyright (C) 2017 Embecosm Limited (www.embecosm.com)
+
+// Contributor: Jeremy Bennett <jeremy.bennett@embecosm.com>
+
+// This file is licensed under the Creative Commons Attribution-ShareAlike 3.0
+// Unported License. To view a copy of this license, visit
+// http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative
+// Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+
+// Measure the laptop thickness from the desk to the flat with the laptop
+// open.
+
+LAPTOP_T = 22;
+
+// Thickness of the wall
+
+T = 3.0;
+
+// Degree of rounding of the inner edges
+
+INNER_R = 1.5;
+
+// Degree of rounding of the outer edges
+
+OUTER_R = INNER_R + T;
+
+// Angle of the stand, plus it opposite angle
+
+A = 60.0;
+B = 90.0 - A;
+
+// Breadth of the stand, which since we are printing on our side is the height
+// of the print.
+
+H = 25;
+
+// Length of the face.  This is the longest part of the stand, so limited by
+// the printer.
+
+F = 200.0;
+
+// small amount to add, that is less than printing resolution. Used to ensure
+// we end up with a simple manifold by overlapping abutting areas.
+
+EPS = 0.01;
+
 // General
 // -------
 
@@ -229,7 +278,7 @@ module main_block () {
 module lo_hole () {
      w1 = OUTER_R;
      w2 = INNER_R;
-     h = H + DELTA;
+     h = H + EPS;
      hull () {
 	  translate (v = intersect (parallel_line (base_line, w1),
 				    parallel_line (face_line, -w1)))
@@ -249,7 +298,7 @@ module lo_hole () {
 module hi_hole () {
      w1 = OUTER_R;
      w2 = INNER_R;
-     h = H + DELTA;
+     h = H + EPS;
      hull () {
 	  translate (v = intersect (parallel_line (back_line, -w1),
 				    parallel_line (face_line, -w1)))

@@ -1,5 +1,13 @@
 2017-11-18 Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* laptop-stand/laptop-stand.scad: Fix accidental over-editing.
+	* music-stand/stand-clamp.scad: Renamed from stand-clamp.scad.
+	* music-stand/wing-bolt.scad: Renamed from wing-bolt.scad.
+	* stand-clamp.scad: Renamed to music-stand/stand-clamp.scad
+	* wing-bolt.scad: Renamed to music-stand/wing-bolt.scad
+
+2017-11-18 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* foot-spacer.scad: Created.
 
 2017-11-13 Jeremy Bennett  <jeremy.bennett@embecosm.com>
