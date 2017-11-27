@@ -20,7 +20,7 @@
 EPS = 0.01;
 
 // Amount around threads, heads etc, to allow for printer overflow
-GAP = 0.3;
+GAP = 0.4;
 
 // Standard constants
 M3_SHANK_R = 3.0 / 2 + GAP;

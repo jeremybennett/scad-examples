@@ -1,14 +1,19 @@
-2017-11-26 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-11-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* music-stand/stand-clamp.scad: Increase GAP to 0.4.
+	* music-stand/wing-bolt.scad: Likewise.
+
+2017-11-26  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* music-stand/stand-clamp.scad: Increase various dimensions.
 
-2017-11-26 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-11-26  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* music-stand/stand-clamp.scad: Print both top and bottom and
 	bigger clearance.
 	* music-stand/wing-bolt.scad: Make wider, and bigger clearance.
 
-2017-11-26 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-11-26  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* laptop-stand/laptop-stand.scad: Fix accidental over-editing.
 	* music-stand/stand-clamp.scad: Renamed from stand-clamp.scad.
@@ -16,11 +21,11 @@
 	* stand-clamp.scad: Renamed to music-stand/stand-clamp.scad
 	* wing-bolt.scad: Renamed to music-stand/wing-bolt.scad
 
-2017-11-18 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-11-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* foot-spacer.scad: Created.
 
-2017-11-13 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-11-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	A version which looks different (flatter top) to the EU plug to
 	avoid mix ups. Also faster rendering.
@@ -31,38 +36,38 @@
 	(slot): Rewritten to use dome function.
 	(plug_cover): Use dome instead of cover function.
 
-2017-11-12 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-11-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* plug-covers/us-plug.scad (sub_cover, cover): Increase diameter
 	to 38.2.
 
-2017-11-12 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-11-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* plug-covers/us-plug.scad: Fix comments to say US, not EU and
 	copyright dates.
 
-2017-11-12 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-11-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* plug-covers/us-plug.scad: Created.
 
-2017-11-12 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-11-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* laptop-stand/README.org: Created.
 	* laptop-stand/laptop-stand.scad: Rewrite to use more functions.
 
-2017-07-22 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-07-22  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* laptop-stand/laptop-stand.scad (cc, cc2): Created.
 
-2017-07-22 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-07-22  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* curtain-rail-hook.scad: Really created!
 
-2017-07-18 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-07-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* curtain-rail-hook.scad: Created.
 
-2017-07-17 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-07-17  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	New version using intersections of lines to find points.
 
@@ -71,15 +76,15 @@
 	(intersect, intersect2): Created.
 	(main_block): Rewritten in terms of intersections
 
-2017-07-16 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-07-16  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* laptop-stand/laptop-stand.scad: First draft created.
 
-2017-03-16 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2017-03-16  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* drawer-support.scad: Created.
 
-2016-12-17 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2016-12-17  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	A LED christmas tree star driven by a cuttlefish.
 
@@ -89,13 +94,13 @@
 	* christmas-star/top_star.scad: Created.
 
 
-2016-12-17 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2016-12-17  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* bottle-holder/nut-header.scad: Adjust dimensions.
 	* bottle-holder/nut-holder.scad: Likewise.
 	* bottle-holder/nut-lock.scad: Likewise.
 
-2016-12-13 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2016-12-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	First version of components for replacment nut and bolt for a
 	Topeack bottle cage.
@@ -106,7 +111,7 @@
 	* bottle-holder/nut-lock.scad: Created.
 	* bottle-holder/nut-washer.scad: Created.
 
-2016-12-03 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2016-12-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	Bring together common code and adjust dimensions after first
 	printing.
@@ -119,7 +124,7 @@
 	and included, move wire slots to box, adjust dimensions after
 	first printing, add bar to hold down board.
 
-2016-12-02 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2016-12-02  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	First attempt at a box to hold three microUSB breakout boards on a
 	BB301 breadboard.
@@ -127,7 +132,7 @@
 	* power-box/power-box.scad: Created.
 	* power-box/power-lid.scad: Created.
 
-2015-12-22 Jeremy Bennett  <jeremy.bennett@embecosm.com>
+2015-12-22  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* plug-covers/uk-plug.scad: Larger gap in the X/Y dimensions.
 
