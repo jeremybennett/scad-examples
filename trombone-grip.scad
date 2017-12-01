@@ -34,6 +34,8 @@ module shaped_block () {
      }
 }
 
+// Optional notched version of the block
+
 module notched_block () {
      difference () {
 	  shaped_block ();
@@ -48,9 +50,9 @@ module notched_block () {
 
 module grip () {
      difference () {
-	  notched_block ();
+	  shaped_block ();
 	  translate (v = [15, 0, 0])
-	       cylinder (r = 1.5, h = 20, $fn = 24, center = true);
+	       cylinder (r = 1.9, h = 20, $fn = 24, center = true);
      }
 }
 

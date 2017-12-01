@@ -1,3 +1,8 @@
+2017-12-01  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* trombone-grip.scad (module grip): Use shaped_block rather than
+	notched_block.
+
 2017-11-30  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* trombone-grip.scad: Created.
