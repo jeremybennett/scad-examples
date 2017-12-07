@@ -1,3 +1,9 @@
+2017-12-07  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* cuttletree/pillar-all1.scad: Created.
+	* cuttletree/power-board.scad: Created.
+	* cuttletree/power-up.scad: Created.
+
 2017-12-01  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* trombone-grip.scad (module grip): Use shaped_block rather than
