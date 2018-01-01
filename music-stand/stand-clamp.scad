@@ -52,7 +52,10 @@ LENGTH  = 30.0;                       // Block dimensions
 BREADTH = 30.0;
 DEPTH   = 20.0;
 
-BAR_R = 10.9 / 2 + GAP * 2;           // The main bar being clamped
+//BAR_D = 10.9;                         // Jeremy's music stand
+BAR_D = 13.0;                         // Lucy's music stand
+
+BAR_R = BAR_D / 2 + GAP * 2;         // The main bar being clamped
 
 
 // The basic block with a horizontal hole in it

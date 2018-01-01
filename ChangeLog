@@ -1,3 +1,8 @@
+2018-01-01  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* laptop-stand/stand-clamp.scad: Generalize tube diameter and add
+	variant for Lucy's stand.
+
 2017-12-31  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* laptop-stand/laptop-stand-2.scad: Created.
