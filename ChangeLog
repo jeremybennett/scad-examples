@@ -1,5 +1,9 @@
 2018-01-01  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* oven-fitting.scad: Created.
+
+2018-01-01  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* laptop-stand/stand-clamp.scad: Generalize tube diameter and add
 	variant for Lucy's stand.
 
