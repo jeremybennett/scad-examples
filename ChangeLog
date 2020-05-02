@@ -1,3 +1,7 @@
+2020-05-02  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* rpr/wcu-box-guide.scad: Increase height of part.
+
 2020-04-22  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* rpr/wcu-box-guide.scad: Created.

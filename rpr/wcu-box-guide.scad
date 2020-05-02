@@ -25,7 +25,7 @@ M3_NUT_D = 5.5;
 M3_NUT_H = 2.5;
 
 // End face dimensions
-END_H = 68.5;
+END_H = 70.0;
 END_W = 73.8;
 
 // Hole radius
