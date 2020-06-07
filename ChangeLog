@@ -1,3 +1,23 @@
+2020-06-07  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Final versions of the picture frame clip and hook. Add new
+	directory for designs using the bolts, nuts, threaded rods library
+	from Rudolf Huttary (aka Parkinbot).
+
+	* .gitignore: Add .g files.
+	* picture-clip.scad: Ensure overlap with EPS, add a rim to the
+	countersink.
+	(cs_hole): Add rim to the countersink
+	(clip): Make smoother using $fn
+	* picture-hook.scad: Created.
+	* threads/LICENSE.txt: Created.
+	* threads/Naca_sweep.scad: Created.
+	* threads/README.md: Created.
+	* threads/Threading.scad: Created.
+	* threads/Threads.stl: Created.
+	* threads/hose-joiner.scad: Created.
+	* threads/mister-nozzle.scad: Created.
+
 2020-05-02  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* picture-clip.scad: Created.

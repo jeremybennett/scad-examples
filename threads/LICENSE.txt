@@ -1,0 +1,7 @@
+bolts, nuts, threaded rods - OpenSCAD library Threading.scad (http://www.thingiverse.com/thing:1659079) by Parkinbot is licensed under the Creative Commons - Attribution - Non-Commercial license.
+http://creativecommons.org/licenses/by-nc/3.0/
+
+This license applies to the following files in this directory:
+- Naca_sweep.scad
+- Threading.scad
+- Threads.stl

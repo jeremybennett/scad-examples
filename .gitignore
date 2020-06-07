@@ -1,5 +1,6 @@
 *~
 *.gcode
+*.g
 *.stl
 *.png
 *.pdf
