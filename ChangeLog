@@ -1,3 +1,22 @@
+2021-07-31  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Second and final part of sunshade shim.
+
+	* sunshade-stand/lower-clip.scad: Created.
+
+2021-07-31  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Initial part of sunshade shim.
+
+	* sunshade-stand/upper-clip.scad: Created.
+
+2020-07-04  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Holder for an old extension plug socket
+
+        * plug-mount/outline.svg: Created.
+        * plug-mount/plug-mount.scad: Created.
+
 2020-06-07  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	Final versions of the picture frame clip and hook. Add new
