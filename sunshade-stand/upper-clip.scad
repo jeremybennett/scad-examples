@@ -7,15 +7,18 @@
 
 // A shim to fit a narrow sunshade pole in a larger holder
 
+// The 3D printer is calibrated so that X-Y are around 2% too small, sizes are
+// adjusted accordingly
+
 MINK_R = 2.0;
 RIM_H = 4.0;
 INNER_H = 25.0;
 RIB_H = 20.0;
 RIB_W = 2.0;
 RIB_D = 1.5;
-OUTER_R = 60.0 / 2.0;
-INNER_R = 53.0 / 2.0;
-POLE_R = 25.3 / 2.0;
+OUTER_R = 61.3 / 2.0;           // Actual 60.0
+INNER_R = 53.0 / 2.0;		// 2% is about enough for easy play each side
+POLE_R = 26.4 / 2.0;		// Actual 25.3, plus 0.25 gap each side
 
 // Very small value
 EPS = 0.01;

@@ -1,3 +1,9 @@
+2021-08-01  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* sunshade-stand/lower-clip.scad: Adjust sizes after test print.
+	* sunshade-stand/test-disc.scad: Facilitate testing of size.
+	* sunshade-stand/upper-clip.scad: Adjust sizes after test print.
+
 2021-07-31  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	Second and final part of sunshade shim.
