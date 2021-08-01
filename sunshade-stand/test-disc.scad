@@ -10,7 +10,7 @@
 // The 3D printer is calibrated so that X-Y are around 2% too small, sizes are
 // adjusted accordingly
 
-POLE_R = 26.4 / 2.0;		// Actual 25.3, plus 0.25 gap each side
+POLE_R = 26.9 / 2.0;		// Actual 25.3, plus 0.5 gap each side
 INNER_R = 53.0 / 2.0;		// 2% is about enough for easy play each side
 
 difference () {

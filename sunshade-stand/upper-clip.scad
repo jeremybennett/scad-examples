@@ -18,7 +18,7 @@ RIB_W = 2.0;
 RIB_D = 1.5;
 OUTER_R = 61.3 / 2.0;           // Actual 60.0
 INNER_R = 53.0 / 2.0;		// 2% is about enough for easy play each side
-POLE_R = 26.4 / 2.0;		// Actual 25.3, plus 0.25 gap each side
+POLE_R = 26.9 / 2.0;		// Actual 25.3, plus 0.5 gap each side
 
 // Very small value
 EPS = 0.01;
