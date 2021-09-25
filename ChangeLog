@@ -1,3 +1,7 @@
+2021-09-25  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* tool-holders/extension-lead.scad: Created.
+
 2021-08-01  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* sunshade-stand/test-disc.scad: Adjust sizes after test print.
