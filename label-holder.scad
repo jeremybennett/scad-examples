@@ -138,5 +138,4 @@ module frame (frame_x, frame_y, frame_front_width, frame_back_width,
      }
 }
 
-frame(70.0, 32.0, 7.0, 5.0, 3.0);
-
+frame(100.0, 60.0, 7.0, 5.0, 3.0);

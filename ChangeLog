@@ -1,3 +1,16 @@
+2021-10-10  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* label-holder.scad: Change dimensions of frame generated.
+	* laptop-stand/laptop-stand-2.scad (intersect): Correct formula of
+	function.
+	(perpendicular_line, join_line1, join_line2, join_line): Functions
+	created.
+	(main_block, lo_hole, hi_hole): Correct logic of modules
+	(lip): Module created.
+	* projector-stand/clamp.scad: Change values of parameters to allow
+	for printer calibration.
+	* tool-holders/extension-lead.scad: Define EPS.
+
 2021-10-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* projector-stand/clamp.scad: Created.

@@ -133,13 +133,13 @@ function intersect (l1, l2) =
 
 // The line r above (below if r is negative) has the equation
 
-//   y = m * x + c + r / sqrt (1 + m^2)
+//   y = m * x + c + r * sqrt (1 + m^2)
 
-// We return the line [FALSE, m, c + r / sqrt (1 + m^2)]
+// We return the line [FALSE, m, c + r * sqrt (1 + m^2)]
 
 function parallel_line1 (l, r) =
      let (m = l[1], c = l[2])
-     [false, m, c + r / sqrt (1 + m * m)];
+     [false, m, c + r * sqrt (1 + m * m)];
 
 
 // Function to compute the equation of a vertical parallel line
@@ -235,6 +235,48 @@ function perpendicular_line (l, p) =
                  : (ishoriz (l) ? perpendicular_line3 (l, p)
                                 : perpendicular_line1 (l, p)));
 
+
+// Function to return the mid point between two points
+
+// Return the resulting mid-point
+
+function mid_point (p1, p2) =
+     [(p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2, (p1[2] + p2[2]) / 2];
+
+
+// Function to return the non-vertical line which passes between two points.
+
+// For now z is ignored.
+
+// Return the resulting line
+
+function join_line1 (p1, p2) =
+     let (x1 = p1[0], x2 = p2[0], y1 = p1[1], y2 = p2[1],
+	  m = (y2 - y1) / (x2 - x1), c = y1 - m * x1)
+     [false, m, c];
+
+
+// Function to return the vertical line which passes between two points.
+
+// For now z is ignored.
+
+// Return the resulting line
+
+function join_line2 (p1, p2) =
+     let (x1 = p1[0])
+     [true, x1];
+
+
+// Function to return the line which passes between two points.
+
+// For now z is ignored. Split into vertical and non-vertical cases
+
+// Return the resulting line
+
+function join_line (p1, p2) =
+     ((p1[0] != p2[0]) ? join_line1 (p1, p2) : join_line2 (p1, p2));
+
+
 // The lines which outline the stand
 
 //   Face:  y = tan (A) * x + 0  ([FALSE, tan (A), 0])
@@ -246,10 +288,12 @@ base_line = [false, 0, 0];
 back_line = [true, F * cos (A)];
 
 
-// The diagonal split perpendicular to the face and intersecting the meeting
-// point of the back and base
+// The diagonal goes from halfway along the face to the meeting point of the
+// back and base.
 
-mid_line = perpendicular_line (face_line, intersect (base_line, back_line));
+mid_line = join_line (mid_point (intersect (back_line, face_line),
+				 intersect (face_line, base_line)),
+		      intersect (base_line, back_line));
 
 
 // Block outline of main stand part.
@@ -262,18 +306,27 @@ mid_line = perpendicular_line (face_line, intersect (base_line, back_line));
 
 // where w = OUTER_R
 
+// We then add the lip, which is at right angles from the forward bottom
+// corner.
+
 module main_block () {
      w = OUTER_R;
+     l1 = parallel_line (base_line, w);
+     l2 = parallel_line (face_line, -w);
+     l3 = parallel_line (back_line, -w);
+
      hull () {
-	  translate (v = intersect (parallel_line (base_line, w),
-				    parallel_line (face_line, -w)))
+
+	  // Main triangle
+
+	  translate (v = intersect (l1, l2))
 	       cylinder (r = w, h = H, center = true, $fn = 24);
-	  translate (v = intersect (parallel_line (back_line, -w),
-				    parallel_line (base_line, w)))
+	  translate (v = intersect (l2, l3))
 	       cylinder (r = w, h = H, center = true, $fn = 24);
-	  translate (v = intersect (parallel_line (face_line, -w),
-				    parallel_line (back_line, -w)))
+	  translate (v = intersect (l3, l1))
 	       cylinder (r = w, h = H, center = true, $fn = 24);
+
+	  // Lip
      }
 }
 
@@ -284,15 +337,15 @@ module lo_hole () {
      w1 = OUTER_R;
      w2 = INNER_R;
      h = H + DELTA;
+     l1 = parallel_line (base_line, w1);
+     l2 = parallel_line (face_line, -w1);
+     l3 = parallel_line (mid_line,  -(T/2 + w2));
      hull () {
-	  translate (v = intersect (parallel_line (base_line, w1),
-				    parallel_line (face_line, -w1)))
+	  translate (v = intersect (l1, l2))
 	       cylinder (r = w2, h = h, center = true, $fn = 24);
-	  translate (v = intersect (parallel_line (mid_line, -w1),
-				    parallel_line (base_line, w1)))
+	  translate (v = intersect (l2, l3))
 	       cylinder (r = w2, h = h, center = true, $fn = 24);
-	  translate (v = intersect (parallel_line (face_line, -w1),
-				    parallel_line (mid_line, -w1)))
+	  translate (v = intersect (l3, l1))
 	       cylinder (r = w2, h = h, center = true, $fn = 24);
      }
 }
@@ -304,16 +357,34 @@ module hi_hole () {
      w1 = OUTER_R;
      w2 = INNER_R;
      h = H + DELTA;
+     l1 = parallel_line (back_line, -w1);
+     l2 = parallel_line (face_line, -w1);
+     l3 = parallel_line (mid_line, T/2 + w2);
      hull () {
-	  translate (v = intersect (parallel_line (back_line, -w1),
-				    parallel_line (face_line, -w1)))
+	  translate (v = intersect (l1, l2))
 	       cylinder (r = w2, h = h, center = true, $fn = 24);
-	  translate (v = intersect (parallel_line (mid_line, w1),
-				    parallel_line (back_line, -w1)))
+	  translate (v = intersect (l2, l3))
 	       cylinder (r = w2, h = h, center = true, $fn = 24);
-	  translate (v = intersect (parallel_line (face_line, -w1),
-				    parallel_line (mid_line, w1)))
+	  translate (v = intersect (l3, l1))
 	       cylinder (r = w2, h = h, center = true, $fn = 24);
+     }
+}
+
+
+// The lip
+
+module lip () {
+     w1 = T/2;
+     w2 = LAPTOP_T + T;
+     l1 = parallel_line (base_line, w1);
+     l2 = parallel_line (face_line, -w1);
+     l3 = perpendicular_line (face_line, intersect (l1, l2));
+     l4 = parallel_line (face_line, w1 + w2);
+     hull () {
+	  translate (v = intersect (l1, l2))
+	       cylinder (r = w1, h = H, center = true, $fn = 24);
+	  translate (v = intersect (l3, l4))
+	       cylinder (r = w1, h = H, center = true, $fn = 24);
      }
 }
 
@@ -322,13 +393,17 @@ module hi_hole () {
 
 module stand () {
      difference () {
-	  main_block ();
+	  union () {
+	       main_block ();
+	       lip ();
+	  }
 	  lo_hole ();
 	  hi_hole ();
      }
 }
 
 
-echo (intersect (base_line, back_line));
+echo ("mid point", mid_point (intersect (back_line, face_line),
+			      intersect (face_line, base_line)))
 echo (mid_line);
 stand ();

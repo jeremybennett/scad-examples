@@ -6,6 +6,10 @@
 
 // SPDX-License-Identifier: CC-BY-SA-4.0
 
+
+// Small amount
+EPS = 0.1;
+
 // Calculate the arc we are using
 ARC_H = 8.0;
 ARC_W = 90.0;
