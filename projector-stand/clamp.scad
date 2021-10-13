@@ -16,8 +16,9 @@ SQUARE_W = 54.0;
 SQUARE_H = 30.0;
 ROUND_R = 5.0;			// Curvature of edge
 BOLT_OFF = SQUARE_W / 2.0 - 10.0;
-SCREW_R = 4.0 / 2.0;		// Assume 4mm screw clearance
-GRUB_R = 2.0 / 2.0;		// Space for grub screw tip
+HEAD_R = 8.6 / 2.0;		// Screw head face-to-face (nominal 8.0 diameter)
+HEAD_H = 4.3 / 2.0;		// Screw head thickness (nominal 4.0)
+GRUB_R = 3.0 / 2.0;		// Space for grub screw tip
 
 // The basic block with rounded edges from which we cut out everything else.
 module block () {
@@ -51,28 +52,46 @@ module raw_clamp () {
      }
 }
 
-difference () {
-     raw_clamp ();
-     // Bolt holes
-     translate (v = [-BOLT_OFF, 0, 0])
+// The slot in which the nut will fit.
+module nut_slot () {
+     hull () {
 	  rotate (a = [90, 0, 0])
-	      cylinder (r = SCREW_R, h = SQUARE_W, $fn = 42);
-     translate (v = [BOLT_OFF, 0, 0])
-	  rotate (a = [-90, 0, 0])
-	      cylinder (r = SCREW_R, h = SQUARE_W, $fn = 42);
-     translate (v = [0, -BOLT_OFF, 0])
-	  rotate (a = [0, 90, 0])
-	      cylinder (r = SCREW_R, h = SQUARE_L, $fn = 42);
-     translate (v = [0, BOLT_OFF, 0])
-	  rotate (a = [0, -90, 0])
-	      cylinder (r = SCREW_R, h = SQUARE_L, $fn = 42);
-     // Grub screw holes
-     rotate (a = [90, 0, 0])
-	  cylinder (r = GRUB_R, h = SQUARE_W, $fn = 42);
-     rotate (a = [-90, 0, 0])
-	  cylinder (r = GRUB_R, h = SQUARE_W, $fn = 42);
-     rotate (a = [0, 90, 0])
-	  cylinder (r = GRUB_R, h = SQUARE_L, $fn = 42);
-     rotate (a = [0, -90, 0])
-	  cylinder (r = GRUB_R, h = SQUARE_L, $fn = 42);
+	       cylinder (r = HEAD_R, h = HEAD_H + EPS, $fn = 6, center = true);
+	  translate (v = [0, 0, SQUARE_H])
+	       rotate (a = [90, 0, 0])
+	            cylinder (r = HEAD_R, h = HEAD_H + EPS, $fn = 6,
+			      center = true);
+     }
 }
+
+// The module for the clamp can be generated without the nut slots.
+module clamp (make_slots) {
+     difference () {
+	  raw_clamp ();
+	  // Optional Nut slots
+	  if (make_slots) {
+	       translate (v = [-BOLT_OFF, (-SQUARE_W + HEAD_H) / 2.0, 0])
+		    nut_slot ();
+	       translate (v = [BOLT_OFF, (SQUARE_W - HEAD_H) / 2.0, 0])
+		    nut_slot ();
+	       translate (v = [(-SQUARE_W + HEAD_H) / 2.0, BOLT_OFF, 0])
+		    rotate (a = [0, 0, -90])
+		         nut_slot ();
+	       translate (v = [(SQUARE_W - HEAD_H) / 2.0, -BOLT_OFF, 0])
+		    rotate (a = [0, 0, -90])
+		         nut_slot ();
+	  }
+	  // Grub screw holes
+	  rotate (a = [90, 0, 0])
+	       cylinder (r = GRUB_R, h = SQUARE_W, $fn = 42);
+	  rotate (a = [-90, 0, 0])
+	       cylinder (r = GRUB_R, h = SQUARE_W, $fn = 42);
+	  rotate (a = [0, 90, 0])
+	       cylinder (r = GRUB_R, h = SQUARE_L, $fn = 42);
+	  rotate (a = [0, -90, 0])
+	       cylinder (r = GRUB_R, h = SQUARE_L, $fn = 42);
+     }
+}
+
+// Generate a clamp with nut slots
+clamp (true);

@@ -1,3 +1,10 @@
+2021-10-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* projector-stand/clamp.scad: Make the grub screw hole larger,
+	replace screw holes by slots for screw heads.
+	(nut_slot): Created.
+	(clamp): Created.
+
 2021-10-10  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* label-holder.scad: Change dimensions of frame generated.
