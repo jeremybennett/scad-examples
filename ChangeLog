@@ -1,3 +1,22 @@
+2021-10-16  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Split out generic code, to allow creation of variants for upper
+	and lower supports. Give the inner square rounded corner, for ease
+	of sliding into wooden frames.
+
+	* projector-stand/clamp.scad: Trim dimensions of square, rename
+	ROUND_R as OUTER_ROUND_R throughout, add INNER_ROUND_R, remove HEAD_H.
+	(big_block): Renamed from block.
+	(block): Renamed to big_block.
+	(hollow_block): Created.
+	(raw_clamp): Rewritten to use hollow_block.
+	(nut_hole): Renamed from nut_slot.
+	(nut_slot): Renamed to nut_hole.
+	(clamp): Parameter renamed as make_holes, nut head slots are now
+	all the way through.
+	* projector-stand/lower-clamp.scad: Created.
+	* projector-stand/upper-clamp.scad: Created.
+
 2021-10-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* projector-stand/clamp.scad: Make the grub screw hole larger,
