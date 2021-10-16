@@ -18,7 +18,7 @@ SQUARE_H = 30.0;
 OUTER_ROUND_R = 5.0;		// Curvature of outer edge
 INNER_ROUND_R = 2.0;		// Curvature of inner corners
 BOLT_OFF = SQUARE_W / 2.0 - 10.0;
-HEAD_R = 9.2 / 2.0;		// Screw head face-to-face (nominal 8.0 diameter)
+HEAD_R = 9.6 / 2.0;		// Screw head face-to-face (nominal 8.0 diameter)
 GRUB_R = 3.0 / 2.0;		// Space for grub screw tip
 
 // The basic block with rounded edges from which we cut out everything else.
