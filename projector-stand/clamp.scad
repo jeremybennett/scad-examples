@@ -12,13 +12,13 @@
 // Useful constants
 EPS = 0.1;			// Small distance
 TUBE_R = 52.2 / 2.0;		// Radius of alumninium tube measured 51.6
-SQUARE_L = 53.3;		// Dimensions of the square
-SQUARE_W = 53.3;
+SQUARE_L = 53.7;		// Dimensions of the square (nominal 54.0)
+SQUARE_W = 53.7;
 SQUARE_H = 30.0;
 OUTER_ROUND_R = 5.0;		// Curvature of outer edge
 INNER_ROUND_R = 2.0;		// Curvature of inner corners
 BOLT_OFF = SQUARE_W / 2.0 - 10.0;
-HEAD_R = 8.6 / 2.0;		// Screw head face-to-face (nominal 8.0 diameter)
+HEAD_R = 9.2 / 2.0;		// Screw head face-to-face (nominal 8.0 diameter)
 GRUB_R = 3.0 / 2.0;		// Space for grub screw tip
 
 // The basic block with rounded edges from which we cut out everything else.
@@ -37,7 +37,7 @@ module hollow_block () {
 		     center = true);
 	  minkowski () {
 	       cube (size = [SQUARE_L - INNER_ROUND_R * 2,
-			     SQUARE_W - INNER_ROUND_R * 2, SQUARE_H],
+			     SQUARE_W - INNER_ROUND_R * 2, EPS],
 		     center = true);
 	       cylinder (h = SQUARE_H, r = INNER_ROUND_R, center = true,
 			 $fn = 24);
