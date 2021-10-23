@@ -12,8 +12,9 @@
 // Useful constants
 EPS = 0.1;			// Small distance
 TUBE_R = 52.2 / 2.0;		// Radius of alumninium tube measured 51.6
-DESK_HOLE_R = 78.5 / 2.0;	// Radius of the desk hole
+DESK_HOLE_R = 79.7 / 2.0;	// Radius of the desk hole (measured 78.5)
 DESK_HOLE_H = 25.0;
+DESK_RIB_R = (1.2) / 2.0;	// Rib (measured 79.7)
 BASE_W = 5.0;			// Thickness of the base wall
 BASE_H = 10.0;			// Thickness of the base flange
 BASE_R = TUBE_R + BASE_W + 15.0; // Flange of the base radius

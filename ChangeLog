@@ -1,3 +1,13 @@
+2021-10-23  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Base holder and clamp at desk level for the projector stand.
+
+	* projector-stand/base.scad: Created.
+	* projector-stand/constants.scad: Adjust DESK_HOLE_R to allow for
+	printer calibration, add DESK_RIB_R.
+	* projector-stand/desk-clamp.scad: Add comments, add ribs.
+	* projector-stand/screw-hole.scad: Created.
+
 2021-10-17  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* projector-stand/clamp.scad: Move constants out into header file.
