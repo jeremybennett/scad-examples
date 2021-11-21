@@ -1,3 +1,8 @@
+2021-11-21  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* extractor.scad: Add Minkowski hull to pad the holes to allow for
+	plastic bleed.
+
 2021-11-20  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* extractor.scad: Created.
