@@ -1,3 +1,7 @@
+2021-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* plug-covers/cee-7-7-plug.scad: Created.
+
 2021-11-21  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* extractor.scad: Angle holes, add cap, adjust dimensions, provide
